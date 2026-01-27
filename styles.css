@@ -75,3 +75,12 @@ body {
   padding: 10px 18px;
   border-radius: 20px;
 }
+
+.site-notice {
+  background: #fff3cd;
+  color: #856404;
+  text-align: center;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
