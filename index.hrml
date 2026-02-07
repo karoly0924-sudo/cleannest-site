@@ -789,25 +789,97 @@ html{ scroll-behavior:smooth; }
                    <div class="formGrid">
               
               
-              <label>
-                <span style="font-size:12px; color:var(--muted); font-weight:900;">Vorname &amp; Nachname</span>
-                <input class="field" id="cnName" name="name" required />
-              </label>
+         <label>
+  <span style="font-size:12px; color:var(--muted); font-weight:900;">Vorname</span>
+  <input
+    class="field"
+    id="cnFirstName"
+    name="first_name"
+    autocomplete="given-name"
+    required
+  />
+</label>
 
-              <label>
-                <span style="font-size:12px; color:var(--muted); font-weight:900;">Telefon (AT, z.B. +43...)</span>
-                <input class="field" id="cnPhone" name="phone" inputmode="tel" required />
-              </label>
+<label>
+  <span style="font-size:12px; color:var(--muted); font-weight:900;">Nachname</span>
+  <input
+    class="field"
+    id="cnLastName"
+    name="last_name"
+    autocomplete="family-name"
+    required
+  />
+</label>
 
-                 <label>
-              <span style="font-size:12px; color:var(--muted); font-weight:900;">E-Mail-Adresse</span>
-                <input class="field" id="cnEmail" name="email" type="email" autocomplete="email" required />
-                </label>
-             
-              <label>
-                <span style="font-size:12px; color:var(--muted); font-weight:900;">Adresse (für Anfahrt &amp; Verfügbarkeit)</span>
-                <input class="field" id="cnAddress" name="address" required />
-              </label>
+  <label>
+  <span style="font-size:12px; color:var(--muted); font-weight:900;">E-Mail-Adresse</span>
+  <input
+    class="field"
+    id="cnEmail"
+    name="email"
+    type="email"
+    autocomplete="email"
+    required
+  />
+</label>
+
+<label>
+  <span style="font-size:12px; color:var(--muted); font-weight:900;">Telefon</span>
+  <div style="display:flex; gap:10px; align-items:center;">
+    <div
+      class="field"
+      style="width:92px; text-align:center; font-weight:900; color:var(--tx); opacity:.95; pointer-events:none; user-select:none;"
+    >
+      +43
+    </div>
+    <input
+      class="field"
+      id="cnPhone"
+      name="phone_local"
+      inputmode="numeric"
+      autocomplete="tel-national"
+      placeholder="6706513480"
+      required
+    />
+  </div>
+  <div class="note" style="margin-top:6px;">
+    Bitte ohne +43 eingeben (nur Ziffern), z.B. 6706513480
+  </div>
+</label>
+
+<label>
+  <span style="font-size:12px; color:var(--muted); font-weight:900;">Straße &amp; Hausnummer</span>
+  <input
+    class="field"
+    id="cnStreet"
+    name="street"
+    autocomplete="street-address"
+    required
+  />
+</label>
+
+<label>
+  <span style="font-size:12px; color:var(--muted); font-weight:900;">PLZ</span>
+  <input
+    class="field"
+    id="cnZip"
+    name="zip"
+    inputmode="numeric"
+    autocomplete="postal-code"
+    required
+  />
+</label>
+
+<label>
+  <span style="font-size:12px; color:var(--muted); font-weight:900;">Ort</span>
+  <input
+    class="field"
+    id="cnCity"
+    name="city"
+    autocomplete="address-level2"
+    required
+  />
+</label>
 
               <!-- 14 Tage (FAGG) – Info (aufklappbar) + Pflicht-Lesen + Ja/Nein + Timestamp -->
       <div class="cn-consent14d" id="cnConsent14dBlock">
