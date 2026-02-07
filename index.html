@@ -1,0 +1,1099 @@
+<!doctype html>
+<html lang="de">
+  <head>
+  <script 
+  id="cookieyes" 
+  type="text/javascript" 
+  src="https://cdn-cookieyes.com/client_data/bb3beaa883611bba0b8f24974775c5d5/script.js">
+</script>
+
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="theme-color" content="#0a1022" />
+    <meta name="color-scheme" content="dark light" />
+
+    <title>CleanNest HAUSSERVICE e.U. – für leichtere Tage und ein sauberes Zuhause</title>
+    <meta
+      name="description"
+      content="CleanNest – professionelle Haus-/Wohnungs-Reinigung ausschließlich für Privatkunden (B2C) in    Österreich. Fixpreis-Pakete, transparente Abwicklung und zuverlässiger Haushaltsservice."
+    />
+
+    <link rel="stylesheet" href="/css/scheduler.css">
+    <!-- Replace these with your real assets -->
+    <link rel="icon" href="/assets/brand/favicon.png" />
+    <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+    <link rel="stylesheet" href="/css/ui.css?v=1">
+
+<style>
+  :root{
+    /* ===== SKY (kártyán kívüli háttér) ===== */
+    --sky0:#dceef8;   /* alsó világoskék */
+    --sky1:#f5fbff;   /* felső majdnem fehér */
+    --sky2:#9fd4ff;   /* közép kék */
+    --sky3:#2d78c8;   /* mélyebb kék */
+
+    /* ===== TEXT ===== */
+    --tx:rgba(255,255,255,.92);
+    --dim:rgba(255,255,255,.70);
+    --muted:rgba(255,255,255,.55);
+
+    /* ===== CARDS (VISSZA SÖTÉTRE) ===== */
+    --card-glass: rgba(10,16,34,.46);
+    --card-glass2:rgba(10,16,34,.62);
+    --card-brd:rgba(255,255,255,.14);
+
+    /* ===== ACCENTS ===== */
+    --accent:rgba(122,162,255,.95);
+    --good:rgba(93,255,184,.95);
+    --warn:rgba(255,209,102,.95);
+    --bad:rgba(255,107,107,.95);
+
+    --r:18px;
+    --shadow: 0 14px 40px rgba(0,0,0,.35);
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+
+  body{
+    margin:0;
+    color:var(--tx);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Helvetica,Arial,sans-serif;
+
+    /* ===== ÉGBOLT (kártyán kívül) ===== */
+    background:
+      radial-gradient(900px 520px at 20% 12%, rgba(255,255,255,.55), transparent 62%),
+      radial-gradient(1100px 620px at 80% 10%, rgba(255,255,255,.42), transparent 64%),
+      radial-gradient(1200px 780px at 50% 35%, rgba(159,212,255,.45), transparent 60%),
+      radial-gradient(1400px 900px at 50% 95%, rgba(45,120,200,.30), transparent 65%),
+      linear-gradient(180deg, var(--sky1) 0%, var(--sky0) 45%, rgba(159,212,255,.55) 68%, rgba(45,120,200,.45) 100%);
+
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ===== Buborékok: csak háttérre (nem kártyára) ===== */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+
+    background:
+      radial-gradient(12px 12px at 12% 22%, rgba(255,255,255,.18), transparent 62%),
+      radial-gradient(18px 18px at 22% 44%, rgba(255,255,255,.16), transparent 62%),
+      radial-gradient(10px 10px at 34% 28%, rgba(255,255,255,.14), transparent 62%),
+      radial-gradient(22px 22px at 46% 52%, rgba(255,255,255,.16), transparent 62%),
+      radial-gradient(14px 14px at 58% 34%, rgba(255,255,255,.14), transparent 62%),
+      radial-gradient(26px 26px at 70% 58%, rgba(255,255,255,.16), transparent 62%),
+      radial-gradient(16px 16px at 82% 30%, rgba(255,255,255,.14), transparent 62%),
+      radial-gradient(20px 20px at 88% 48%, rgba(255,255,255,.15), transparent 62%),
+      radial-gradient(12px 12px at 18% 78%, rgba(255,255,255,.12), transparent 62%),
+      radial-gradient(24px 24px at 74% 82%, rgba(255,255,255,.12), transparent 62%);
+    opacity:.9;
+  }
+
+  /* Oldal tartalom mindig a buborék réteg fölött */
+  .wrap{ width:min(1120px, calc(100% - 32px)); margin:0 auto; position:relative; z-index:1; }
+  a{ color:inherit; }
+
+  /* ===== Glass helpers (KÁRTYÁK SÖTÉTEK) ===== */
+  .glass{
+    background: linear-gradient(180deg, var(--card-glass2), var(--card-glass));
+    border:1px solid var(--card-brd);
+    border-radius: var(--r);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: var(--shadow);
+    position:relative;
+    z-index:1;
+  }
+
+  .btn{
+    appearance:none;
+    border:1px solid rgba(255,255,255,.16);
+    background: rgba(10,16,34,.18);
+    color:var(--tx);
+    border-radius:14px;
+    padding:6px 12px;
+    font-weight:800;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+  }
+  .btn.primary{
+    background: rgba(122,162,255,.22);
+    border-color: rgba(122,162,255,.38);
+  }
+  .btn.ghost{
+    background: rgba(10,16,34,.14);
+    border-color: rgba(255,255,255,.14);
+  }
+
+  .pill{
+    display:inline-flex;
+    gap:8px;
+    align-items:center;
+    padding:8px 12px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(10,16,34,.14);
+    font-size:13px;
+    color:var(--dim);
+    white-space:nowrap;
+  }
+  .pill.strong{
+    color:var(--tx);
+    border-color: rgba(93,255,184,.30);
+    background: rgba(93,255,184,.10);
+  }
+
+  /* Hero */
+  section.hero{ padding:28px 0 12px; }
+  .heroGrid{ display:grid; grid-template-columns: 1fr; gap:14px; }
+  .heroMain{ padding:18px; }
+  .heroSide{ padding:18px; }
+  h1{ margin:0; font-size: clamp(28px, 4.4vw, 46px); letter-spacing:-.7px; }
+  .lead{ margin:12px 0 0; color:var(--dim); font-size:16px; line-height:1.55; }
+  .badgeRow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+  .ctaRow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+
+  /* Big brand orb (no people) */
+  .brandOrb{
+    position:relative;
+    width:100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--r);
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.14);
+    background:
+      radial-gradient(420px 240px at 50% 20%, rgba(255,255,255,.14), transparent 62%),
+      radial-gradient(520px 320px at 50% 80%, rgba(10,16,34,.22), transparent 62%),
+      linear-gradient(180deg, rgba(255,255,255,.08), rgba(10,16,34,.14));
+  }
+  .orbInner{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; transform: translateY(-6px); }
+  .orbLogo{ width:min(270px, 70%); height:auto; filter: drop-shadow(0 18px 44px rgba(0,0,0,.35)); opacity:.95; }
+  .orbHint{ position:absolute; left:12px; right:12px; bottom:12px; display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+
+  /* Sections */
+  section.block{ padding:14px 0; }
+  .h2{ margin:0 0 12px; font-size:20px; letter-spacing:-.2px; }
+  .grid3{ display:grid; grid-template-columns: 1fr; gap:12px; }
+  .card{ padding:14px; }
+  .card h3{ margin:0 0 8px; font-size:16px; }
+  .card p{ margin:0; color:var(--dim); font-size:14px; line-height:1.55; }
+  .note{ color:var(--muted); font-size:12px; line-height:1.45; }
+
+  /* Booking */
+  form label{ display:block; }
+  .field{
+    width:100%;
+    padding:12px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(10,16,34,.16);
+    color:var(--tx);
+    outline:none;
+  }
+  .field:focus{ border-color: rgba(122,162,255,.45); box-shadow: 0 0 0 3px rgba(122,162,255,.14); }
+  .formGrid{ display:grid; grid-template-columns: 1fr; gap:10px; }
+
+  /* Footer */
+  footer{ margin-top:18px; padding:22px 0 34px; border-top:1px solid rgba(255,255,255,.10); }
+  .footGrid{ display:grid; grid-template-columns: 1fr; gap:12px; }
+  .legalLinks{ display:flex; flex-wrap:wrap; gap:12px; color:var(--muted); }
+  .legalLinks a{ color:var(--muted); text-decoration: underline; }
+
+         /* Chat orb */
+.chatOrb{
+  position:fixed;
+  right:14px;
+  bottom:14px;
+  width:56px;
+  height:56px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.22), rgba(122,162,255,.18));
+  box-shadow: 0 18px 46px rgba(0,0,0,.38);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:80;
+  cursor:pointer;
+}
+.chatOrb svg{ opacity:.95; }
+.chatSheetScrim{
+  position:fixed; inset:0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display:none;
+  z-index:85;
+}
+.chatSheet{
+  position:fixed;
+  left:12px; right:12px; bottom:12px;
+  height:min(70vh, 560px);
+  display:none;
+  z-index:90;
+  padding:12px;
+}
+.chatHead{
+  display:flex; justify-content:space-between; align-items:center;
+  gap:10px; padding:10px 10px 12px;
+}
+.chatTitle{ font-weight:900; }
+.chatBody{
+  height: calc(100% - 56px);
+  display:flex; flex-direction:column;
+  gap:10px;
+  padding:0 10px 10px;
+}
+.chatLog{
+  flex:1;
+  overflow:auto;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:16px;
+  background: rgba(255,255,255,.04);
+  padding:10px;
+}
+.msg{ margin:0 0 8px; color:var(--dim); font-size:13px; line-height:1.45; }
+.chatInputRow{ display:flex; gap:10px; }
+.chatInputRow input{ flex:1; }
+
+  /* ===== TOPBAR (BAL LOGO + KÖZÉP IKON + JOBB TELEFON + ONLINE BUCHEN) ===== */
+header.topbar{
+position: sticky;
+top: 0;
+z-index: 50;
+border-bottom: 1px solid rgba(0,0,0,.08);
+background:
+radial-gradient(1200px 500px at 50% -20%, rgba(255,255,255,.85), transparent 60%),
+radial-gradient(900px 420px at 15% 20%, rgba(230,244,255,.95), transparent 60%),
+radial-gradient(900px 420px at 85% 15%, rgba(200,232,250,.90), transparent 60%),
+linear-gradient(180deg, #F5FBFF 0%, #D7ECF8 55%, #B9D9EE 100%);
+backdrop-filter: none;
+-webkit-backdrop-filter: none;
+box-shadow:
+0 14px 30px rgba(0,0,0,.18),
+0 4px 8px rgba(0,0,0,.08);
+}
+
+header.topbar .topbarWrap{
+width:100%;
+margin:0;
+padding: 2px 0 2px 2px;
+}
+
+.toprow{
+position: relative;
+height: 72px;
+padding: 10px 0;
+isolation: isolate;
+display: flex;
+align-items: center;
+}
+
+.brand{
+position: absolute;
+left: -16px;
+top: 50%;
+transform: translateY(-50%);
+z-index: 6;
+display: inline-flex;
+align-items: center;
+text-decoration: none;
+min-width: 0;
+}
+
+@media (min-width: 900px){
+  header.topbar .topbarWrap{
+    width:min(1120px, calc(100% - 32px));
+    margin:0 auto;
+    padding: 2px 0;
+  }
+  .brand{
+    left: 0;
+  }
+}
+
+.brandLogoSmall{
+height: clamp(65px, 10vw, 76px);
+width: auto;
+display: block;
+}
+
+.heroBanner{
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+top: -38px;
+width: clamp(220px, 42vw, 420px);
+height: auto;
+pointer-events: none;
+z-index: 4;
+}
+
+header.topbar .actions{
+position: relative;
+margin-left:auto;
+display:inline-flex;
+align-items:center;
+gap:6px;
+white-space:nowrap;
+}
+
+.phoneLink{
+display: inline-flex;
+align-items: center;
+gap: 8px;
+text-decoration: none;
+white-space: nowrap;
+}
+
+header.topbar .phoneNum{
+color:#0B5ED7;
+font-weight:400;
+letter-spacing:0;
+font-size:32px;
+line-height:1;
+}
+
+header.topbar .btn.primary.topbarCta{
+background:#C49B46;
+color:#0f1216;
+border:1px solid rgba(0,0,0,.10);
+box-shadow: 0 6px 16px rgba(255,140,0,.35);
+height:18px;
+padding:0 7px;
+border-radius: 10px;
+font-size: 8px;
+font-weight: 400;
+line-height: 1;
+}
+
+@media (max-width:420px){
+.heroBanner{
+width: 220px;
+max-width: 100%;
+top: -32px;
+}
+
+header.topbar .actions{
+display: grid;
+gap: 4px;
+align-items: start;
+justify-items: start;
+transform: translateY(6px);
+z-index: 10;
+}
+
+header.topbar .btn.primary.topbarCta{
+  align-self: start;
+  justify-self: end;
+  width: max-content;
+}
+
+header.topbar .phoneNum{
+font-size: 14px;
+font-weight: 500;
+}
+
+.brandLogoSmall{
+height: 107px;
+margin-left: 8px; 
+}
+
+/* ===== MOBILE: MENU LEFT + ACTIONS DOWN TOGETHER ===== */
+header.topbar .actions{
+position:absolute;
+right:12px;
+bottom:10px;
+margin-left:0;
+}
+
+#cnHamb{
+position:absolute;
+right:20px;
+bottom:43px;
+}
+}
+
+/* ===== MOBILE MENU OVERLAY (FIXED) ===== */
+.mobileMenuScrim{
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 120;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.mobileMenu{
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  top: 88px;                 /* header alatt */
+  max-height: calc(100vh - 110px);
+  overflow: auto;
+  display: none;
+  z-index: 130;
+}
+
+.mobileMenu .row{
+  display: grid;
+  gap: 10px;
+}
+
+.mobileMenu a{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 12px;
+  border-radius: 14px;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(10,16,34,.14);
+}
+       /* ===== VISUAL DARKEN PATCH ===== */
+ header.topbar{
+  background:
+    radial-gradient(220px 150px at 15% 40%, rgba(52,183,255,.85), transparent 65%),
+    radial-gradient(180px 130px at 15% 40%, rgba(31,174,91,.70), transparent 70%),
+    radial-gradient(90px 70px at 15% 40%, rgba(255,255,255,.35), transparent 75%),
+
+    radial-gradient(10px 10px at 22% 62%, rgba(255,255,255,.10), transparent 70%),
+    radial-gradient(14px 14px at 28% 28%, rgba(52,183,255,.10), transparent 72%),
+    radial-gradient(9px 9px at 36% 66%, rgba(31,174,91,.09), transparent 72%),
+    radial-gradient(12px 12px at 44% 36%, rgba(255,255,255,.08), transparent 72%),
+    radial-gradient(8px 8px at 52% 58%, rgba(52,183,255,.08), transparent 72%),
+    radial-gradient(16px 16px at 60% 30%, rgba(31,174,91,.08), transparent 74%),
+    radial-gradient(11px 11px at 66% 64%, rgba(255,255,255,.08), transparent 72%),
+    radial-gradient(9px 9px at 72% 42%, rgba(52,183,255,.08), transparent 72%),
+    radial-gradient(13px 13px at 78% 60%, rgba(31,174,91,.08), transparent 74%),
+    radial-gradient(8px 8px at 84% 30%, rgba(255,255,255,.07), transparent 72%),
+    radial-gradient(15px 15px at 90% 66%, rgba(52,183,255,.07), transparent 74%),
+
+    radial-gradient(140px 100px at 85% 35%, rgba(31,174,91,.45), transparent 70%),
+    linear-gradient(180deg, rgba(10,16,34,.85), rgba(10,16,34,.95));
+
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 10px 35px rgba(0,0,0,.55);
+}
+
+footer{
+  background: linear-gradient(
+    to bottom,
+    rgba(10,16,34,.92),
+    rgba(10,16,34,.98)
+  );
+}
+
+/* subtle attention effect – phone only */
+header.topbar .phoneNum{
+  animation: phoneBreath 3.2s ease-in-out infinite;
+}
+
+@keyframes phoneBreath{
+  0%   { opacity: .65; }
+  50%  { opacity: 1; }
+  100% { opacity: .65; }
+}
+
+nav.desktopNav{ display:none; }
+
+@media (min-width: 900px){
+
+  /* DESKTOP: header ugyanarra a középső konténerre zár, mint .wrap */
+  header.topbar .topbarWrap{
+    width:min(1120px, calc(100% - 32px));
+    margin:0 auto;
+    padding: 2px 0;
+    position: relative;
+  }
+
+  /* desktopon ne lógjon ki a logo */
+  .brand{ left: 0; }
+
+  /* desktop nav látszik, hamburger eltűnik */
+  nav.desktopNav{ display:flex; }
+  .hamb{ display:none; }
+
+  /* PC-n is mobil-tükör (1 oszlop) */
+  .heroGrid{ grid-template-columns: 1fr; }
+  .grid3{ grid-template-columns: 1fr; }
+  .footGrid{ grid-template-columns: 1fr; align-items:start; }
+}
+
+html{ scroll-behavior:smooth; }
+
+</style>
+   </head>
+
+<body>
+  <header class="topbar">
+    <div class="topbarWrap">
+      <div class="toprow">
+        <!-- BAL: feliratos logo (nagyobb) -->
+        <a class="brand" href="#home" aria-label="CleanNest Startseite">
+          <img src="/assets/brand/logo.png" class="brandLogoSmall" alt="CleanNest Logo" />
+        </a>
+          <button class="btn hamb" id="cnHamb" type="button" aria-label="Menü öffnen">
+            Menü
+          </button>
+        </div>
+        
+        <!-- KÖZÉP: nagy ikon (felirat nélkül) -->
+        <img src="/assets/brand/logo-icon.png" class="heroBanner" alt="CleanNest Icon" />
+
+        <!-- JOBB: telefonszám (ikon nélkül, kék) + Online buchen + hamburger -->
+        <div class="actions">
+        
+         <a class="btn primary topbarCta" href="#buchung" aria-label="Online buchen">
+           Online buchen
+         </a>
+       
+             <a class="phoneLink" href="tel:+436706518480" aria-label="Telefon">
+          <span class="phoneNum">+43 670 651 8480</span>
+          </a>
+          
+        <nav class="desktopNav" aria-label="Hauptnavigation">
+        <a href="#home">Home</a>
+        <a href="#pakete">Pakete</a>
+        <a href="#preise">Preise</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="/agb.html">AGB</a>
+      </nav>
+        </div>
+     </div>
+  </header>
+
+ 
+     <!-- Mobile Menu -->
+  <div class="mobileMenuScrim" id="cnMenuScrim"></div>
+  <div class="mobileMenu glass" id="cnMenu" role="dialog" aria-label="Menü">
+    <div class="row">
+      <a href="#home" data-closemenu="1">Home <span style="opacity:.7">›</span></a>
+      <a href="#pakete" data-closemenu="1">Pakete <span style="opacity:.7">›</span></a>
+      <a href="#preise" data-closemenu="1">Preise <span style="opacity:.7">›</span></a>
+      <a href="#kontakt" data-closemenu="1">Kontakt <span style="opacity:.7">›</span></a>
+      <a href="/impressum.html">Impressum <span style="opacity:.7">›</span></a>
+      <a href="/datenschutz.html">Datenschutz <span style="opacity:.7">›</span></a>
+      <a href="/agb.html">AGB <span style="opacity:.7">›</span></a>
+    </div>
+    <div style="height:10px"></div>
+    <button class="btn" id="cnMenuClose" type="button" style="width:100%; justify-content:center;">Schließen</button>
+  </div>
+
+     <main id="home">
+    <section class="hero">
+      <div class="wrap">
+        <div class="heroGrid">
+          <div class="heroMain glass">
+            <h1>Ihre professionelle Reinigung<br/>für ein glänzendes Zuhause</h1>
+            <p class="lead">
+              Haus- und Wohnungsreinigung <strong>ausschließlich für Privatkunden (B2C)</strong> in Österreich.
+              Fixpreis-Pakete, transparente Abwicklung und zuverlässiger Haushaltsservice.
+            </p>
+
+            <div class="badgeRow" aria-label="Hinweise">
+              <span class="pill strong">✅ Nur für Privatkunden (B2C)</span>
+              <span class="pill">📍 Niederösterreich &amp; Wien</span>
+              <span class="pill">💶 Fixpreise · keine Stundenabrechnung</span>
+            </div>
+
+            <div class="ctaRow">
+              <a class="btn primary" href="#pakete">Pakete ansehen</a>
+              <a class="btn" href="#buchung">Termin anfragen</a>
+            </div>
+
+            <p class="note" style="margin-top:12px;">
+              Hinweis: Keine gewerblichen/industriellen Reinigungen und keine genehmigungspflichtigen Tätigkeiten.
+            </p>
+          </div>
+
+          <aside class="heroSide glass" aria-label="Brand-Bereich">
+            <div class="brandOrb" aria-label="CleanNest Symbol">
+              <div class="orbInner">
+                <!-- NO PEOPLE. Replace with an abstract package/brand SVG if desired -->
+                <svg class="orbLogo" viewBox="0 0 560 320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <defs>
+                    <radialGradient id="g1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(280 110) rotate(90) scale(150 220)">
+                      <stop stop-color="rgba(255,255,255,.28)"/>
+                      <stop offset="1" stop-color="rgba(255,255,255,0)"/>
+                    </radialGradient>
+                    <linearGradient id="g2" x1="120" y1="230" x2="440" y2="230" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="rgba(93,255,184,.55)"/>
+                      <stop offset="0.5" stop-color="rgba(122,162,255,.55)"/>
+                      <stop offset="1" stop-color="rgba(255,209,102,.45)"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M100 210c55 65 305 65 360 0" stroke="url(#g2)" stroke-width="22" stroke-linecap="round"/>
+                  <circle cx="280" cy="125" r="92" fill="url(#g1)"/>
+                  <path d="M235 120c14-24 30-38 45-38s31 14 45 38c-14 24-30 38-45 38s-31-14-45-38Z" fill="rgba(122,162,255,.55)"/>
+                  <path d="M182 92c20-18 44-30 70-36" stroke="rgba(255,255,255,.28)" stroke-width="10" stroke-linecap="round"/>
+                  <path d="M378 92c-20-18-44-30-70-36" stroke="rgba(255,255,255,.28)" stroke-width="10" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="orbHint">
+                <span class="pill">⭐ 5.0</span>
+                <span class="pill">Online buchen · Bestätigung erforderlich</span>
+              </div>
+            </div>
+
+            <div style="height:12px"></div>
+
+            <div class="glass card" style="padding:14px;">
+              <h3>So funktioniert’s</h3>
+              <p>1) Paket wählen · 2) Termin anfragen · 3) Bestätigung erhalten · 4) Optional online zahlen</p>
+            </div>
+
+            <div style="height:12px"></div>
+
+            <div class="glass card" style="padding:14px;">
+              <h3>Privatkunden-Only</h3>
+              <p>Wir arbeiten ausschließlich für private Haushalte (B2C). Gewerbliche/industrielle Anfragen werden nicht angenommen.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="pakete" class="block">
+      <div class="wrap">
+        <h2 class="h2">Pakete</h2>
+        <div class="grid3" role="list" aria-label="Pakete">
+          <article class="glass card" role="listitem">
+            <h3>BASIC</h3>
+            <p>Grundreinigung für ein gepflegtes Zuhause. Fixpreis, klarer Leistungsumfang, Privatkunden-only.</p>
+            <div class="ctaRow">
+              <a class="btn" href="#buchung" data-pack="basic">BASIC wählen</a>
+            </div>
+          </article>
+
+          <article class="glass card" role="listitem">
+            <h3>STANDARD</h3>
+            <p>Mehr Details &amp; mehr Gründlichkeit für Privatkunden, die ein spürbar frisches Zuhause wollen.</p>
+            <div class="ctaRow">
+              <a class="btn" href="#buchung" data-pack="standard">STANDARD wählen</a>
+            </div>
+          </article>
+
+          <article class="glass card" role="listitem">
+            <h3>INTENSIV</h3>
+            <p>Für intensivere Fälle im Haushalt. Fokus auf Problemzonen und gründliche Detailarbeit.</p>
+            <div class="ctaRow">
+              <a class="btn" href="#buchung" data-pack="intensiv">INTENSIV wählen</a>
+            </div>
+          </article>
+        </div>
+
+        <p class="note" style="margin-top:12px;">
+          Interne Zeitkorridore (min/max) dienen ausschließlich der Einsatzplanung und werden Kunden nicht angezeigt.
+        </p>
+      </div>
+    </section>
+
+    <section id="preise" class="block">
+      <div class="wrap">
+        <h2 class="h2">Preise</h2>
+        <div class="glass card" style="padding:16px;">
+          <p style="margin:0; color:var(--dim); line-height:1.55;">
+            Fixpreis-Pakete (keine Stundenabrechnung). Der genaue Paketumfang und die Preisdetails werden in den Paketen und in der Bestätigung transparent ausgewiesen.
+            <strong>Nur für Privatkunden (B2C).</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="buchung" class="block">
+      <div class="wrap">
+        <h2 class="h2">Online buchen (Termin anfragen)</h2>
+
+        <div class="glass card" style="padding:16px;">
+          <p style="margin:0 0 10px; color:var(--dim); line-height:1.55;">
+            Wir bestätigen jeden Termin. Dadurch sind Doppelbuchungen ausgeschlossen und Reisezeiten werden berücksichtigt.
+            <strong>Nur Privatkunden (B2C).</strong>
+          </p>
+
+          <form id="cnBookingForm" autocomplete="on">
+            <div class="formGrid">
+              <label>
+                <span style="font-size:12px; color:var(--muted); font-weight:900;">Paket</span>
+                <select class="field" id="cnPack" name="pack">
+                  <option value="basic">BASIC</option>
+                  <option value="standard">STANDARD</option>
+                  <option value="intensiv">INTENSIV</option>
+                </select>
+              </label>
+
+              <label>
+                <span style="font-size:12px; color:var(--muted); font-weight:900;">Name</span>
+                <input class="field" id="cnName" name="name" required />
+              </label>
+
+              <label>
+                <span style="font-size:12px; color:var(--muted); font-weight:900;">Telefon</span>
+                <input class="field" id="cnPhone" name="phone" inputmode="tel" required />
+              </label>
+
+                 <label>
+              <span style="font-size:12px; color:var(--muted); font-weight:900;">E-Mail</span>
+                <input class="field" id="cnEmail" name="email" type="email" autocomplete="email" required />
+                </label>
+             
+              <label>
+                <span style="font-size:12px; color:var(--muted); font-weight:900;">Adresse (für Reisezeit &amp; Verfügbarkeit)</span>
+                <input class="field" id="cnAddress" name="address" required />
+              </label>
+
+              <!-- 14 Tage (FAGG) – Info (aufklappbar) + Pflicht-Lesen + Ja/Nein + Timestamp -->
+      <div class="cn-consent14d" id="cnConsent14dBlock">
+      <details class="cn-consent14d__details">
+      <summary class="cn-consent14d__summary">
+      Ausdrückliches Verlangen bei kurzfristigen Terminen (innerhalb 14 Tage) – Details öffnen
+    </summary>
+
+    <div class="cn-consent14d__box">
+      <div class="cn-consent14d__text">
+        Wenn Sie einen Termin innerhalb der nächsten 14 Tage wünschen, benötigen wir Ihr ausdrückliches Verlangen,
+        dass wir mit der Dienstleistung vor Ablauf der gesetzlichen Widerrufsfrist beginnen.
+        Ohne dieses ausdrückliche Verlangen kommt keine verbindliche Buchung zustande.
+        <div style="margin-top:10px;">
+          <a href="/widerruf-14tage.html" target="_blank" rel="noopener">
+            Gesetzliche Details lesen (FAGG – 14 Tage)
+          </a>
+        </div>
+      </div>
+
+      <label class="cn-consent14d__choice" style="margin-top:10px;">
+        <input id="cnConsent14dRead" type="checkbox">
+        <span>Ich habe die Informationen gelesen und verstanden.</span>
+      </label>
+
+      <div class="cn-consent14d__choices" role="group" aria-label="Ausdrückliches Verlangen innerhalb 14 Tage">
+        <label class="cn-consent14d__choice">
+          <input id="cnConsent14dYes" type="radio" name="consent_14d_choice" value="yes">
+          <span>Ja, ich verlange ausdrücklich die Ausführung der Dienstleistung vor Ablauf der 14-tägigen Widerrufsfrist.</span>
+        </label>
+
+        <label class="cn-consent14d__choice">
+          <input id="cnConsent14dNo" type="radio" name="consent_14d_choice" value="no">
+          <span>Nein</span>
+        </label>
+      </div>
+
+          <label class="cn-consent14d__choice" style="margin-top:10px;">
+          <input id="cnConsent14dLoss" type="checkbox">
+           <span>Ich nehme zur Kenntnis, dass ich mein Widerrufsrecht verliere, sobald die Dienstleistung           vollständig erbracht wurde.</span>
+            </label>
+
+           <input id="consent_14d_loss_at" name="consent_14d_loss_at" type="hidden" value="">
+    
+      <!-- Hidden: kompatibilis marad a jelenlegi feldolgozással -->
+      <input id="consent_14d" name="consent_14d" type="checkbox" value="1" hidden>
+      <input id="consent_14d_at" name="consent_14d_at" type="hidden" value="">
+      <input id="consent_14d_read_at" name="consent_14d_read_at" type="hidden" value="">
+    </div>
+  </details>
+</div>
+           
+               <label>
+                <span style="font-size:12px; color:var(--muted); font-weight:900;">Wunschtermin (Datum)</span>
+                <input class="field" id="cnDate" name="date" type="date" required />
+              </label>
+
+              <div id="cnSchedulerHost"></div>
+              <input type="hidden" id="cnStart" name="start" />
+
+              <label>
+                <span style="font-size:12px; color:var(--muted); font-weight:900;">Hinweis (optional)</span>
+                <textarea class="field" id="cnNote" name="note" rows="3"></textarea>
+              </label>
+
+              <div class="checkRow">
+                <input id="cnB2C" type="checkbox" required />
+                <div>
+                  Ich bestätige, dass ich als <strong>Privatkunde</strong> anfrage (B2C). Gewerbliche/industrielle Anfragen werden nicht angenommen.
+                </div>
+              </div>
+
+              <div class="checkRow">
+                <input id="cnLegal" type="checkbox" required />
+                <div>
+                  Ich akzeptiere die <a href="/agb.html">AGB</a> und die <a href="/datenschutz.html">Datenschutzhinweise</a>.
+                </div>
+              </div>
+
+              <div class="ctaRow">
+                <button class="btn primary" id="cnSubmit" type="submit">Termin anfragen</button>
+                <button class="btn" id="cnAiSuggest" type="button">AI Vorschlag (2 Optionen)</button>
+              </div>
+
+              <div class="glass card aiPanel" id="cnAiPanel" style="padding:14px;">
+                <h3 style="margin:0 0 8px;">AI Vorschläge (2 Optionen)</h3>
+                <p class="note" style="margin:0 0 10px;">
+                  Die AI empfiehlt nur und ändert nichts automatisch. „Accept“ füllt nur Felder aus.
+                </p>
+                <div id="cnAiOptions" style="display:grid; gap:10px;"></div>
+              </div>
+
+              <p class="note" style="margin:0;">
+                Online-Zahlung nur nach bestätigtem Termin und nur durch Ihre aktive Auswahl (keine automatische Abbuchung).
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt" class="block">
+      <div class="wrap">
+        <h2 class="h2">Kontakt</h2>
+        <div class="glass card" style="padding:16px;">
+          <p style="margin:0; color:var(--dim); line-height:1.55;">
+            Telefon: <a href="tel:+436706518480">+43 670 651 8480</a><br/>
+            E-Mail: <a href="mailto:office@cleannest.at">office@cleannest.at</a><br/>
+            Einsatzgebiet: Niederösterreich &amp; Wien<br/>
+            <strong>Ausschließlich für Privatkunden (B2C).</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="footGrid">
+          <div>
+            <div style="font-weight:900;">CleanNest HAUSSERVICE e.U.</div>
+            <div class="note" style="margin-top:6px;">
+              CleanNest – für leichtere Tage und ein sauberes Zuhause<br/>
+              Haus- und Wohnungsreinigung ausschließlich für Privatkunden (B2C) in Österreich.
+            </div>
+          </div>
+          <div class="legalLinks" aria-label="Rechtliches">
+            <a href="/impressum.html">Impressum</a>
+            <a href="/datenschutz.html">Datenschutz</a>
+            <a href="/agb.html">AGB</a>
+            <a href="/widerruf.html">Widerruf</a>
+            <a href="/cookies.html">Cookie-Einstellungen</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Chat orb + sheet (demo UI only, no sending) -->
+  <div class="chatOrb" id="cnChatOrb" aria-label="Chat öffnen">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M5 6.5C5 5.12 6.12 4 7.5 4h9C17.88 4 19 5.12 19 6.5v6C19 13.88 17.88 15 16.5 15H10l-3.5 3v-3H7.5C6.12 15 5 13.88 5 12.5v-6Z" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <div class="chatSheetScrim" id="cnChatScrim"></div>
+  <div class="chatSheet glass" id="cnChatSheet" role="dialog" aria-label="Chat">
+    <div class="chatHead">
+      <div class="chatTitle">Chat (Demo)</div>
+      <button class="btn" id="cnChatClose" type="button">Schließen</button>
+    </div>
+    <div class="chatBody">
+      <div class="chatLog" id="cnChatLog">
+        <p class="msg"><strong>System:</strong> Chat ist ein Demo-UI. Keine automatische Antwort und kein Versand.</p>
+      </div>
+      <div class="chatInputRow">
+        <input class="field" id="cnChatInput" placeholder="Nachricht schreiben…" />
+        <button class="btn primary" id="cnChatSend" type="button">Senden</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+   
+      (function(){
+        "use strict";
+
+        function $(id){ return document.getElementById(id); }
+         
+         function _cnLock(){
+        if(!window.__CN_LOCK) window.__CN_LOCK={n:0,prev:""};
+        var s=window.__CN_LOCK;
+        if(s.n===0) s.prev=document.body.style.overflow||"";
+         s.n++;
+       document.body.style.overflow="hidden";
+}
+        function _cnUnlock(){
+        if(!window.__CN_LOCK) window.__CN_LOCK={n:0,prev:""};
+        var s=window.__CN_LOCK;
+        if(s.n>0) s.n--;
+        if(s.n===0) document.body.style.overflow=s.prev||"";
+}          
+
+           // Mobile menu
+        var hamb = $("cnHamb");
+        var scrim = $("cnMenuScrim");
+        var menu = $("cnMenu");
+        var closeBtn = $("cnMenuClose");
+
+        function openMenu(){
+        if(scrim) scrim.style.display="block";
+       if(menu) menu.style.display="block";
+      _cnLock();
+    }
+       function closeMenu(){
+       if(scrim) scrim.style.display="none";
+      if(menu) menu.style.display="none";
+     _cnUnlock();
+       }
+        if (hamb) hamb.addEventListener("click", openMenu);
+        if (scrim) scrim.addEventListener("click", closeMenu);
+        if (closeBtn) closeBtn.addEventListener("click", closeMenu);
+        if (menu){
+          menu.addEventListener("click", function(e){
+            var a = e.target && e.target.closest ? e.target.closest("a[data-closemenu='1']") : null;
+            if (a) closeMenu();
+          });
+        }
+
+        // Pack buttons -> preselect
+        document.addEventListener("click", function(e){
+          var a = e.target && e.target.closest ? e.target.closest("a[data-pack]") : null;
+          if (!a) return;
+          var v = a.getAttribute("data-pack") || "";
+          var sel = $("cnPack");
+          if (sel && v) sel.value = v;
+        });
+
+        // AI panel (exactly 2 suggestions; accept fills only)
+        var aiBtn = $("cnAiSuggest");
+        var aiPanel = $("cnAiPanel");
+        var aiOptions = $("cnAiOptions");
+
+        function renderAi(){
+          if (!aiPanel || !aiOptions) return;
+          aiOptions.innerHTML = "";
+
+          var packSel = $("cnPack");
+          var pack = packSel ? packSel.value : "basic";
+
+          var s1 = {
+            tag: "Wettbewerbsfähig",
+            cls: "good",
+            text: "Empfehlung für einen schnellen, preisbewussten Ablauf. Termin bleibt nur als Anfrage bis zur Bestätigung.",
+            note: "Wettbewerbsfähige Option gewünscht. Bitte bestätigen Sie den Termin."
+          };
+          var s2 = {
+            tag: "Sicher",
+            cls: "warn",
+            text: "Empfehlung mit mehr Puffer für Reisezeit und Planbarkeit. Reduziert Risiko von Verzögerungen.",
+            note: "Sichere Option (mit Puffer) gewünscht. Bitte bestätigen Sie den Termin."
+          };
+
+          [s1,s2].forEach(function(s, idx){
+            var box = document.createElement("div");
+            box.className = "aiOpt";
+            box.innerHTML =
+              '<div class="top">' +
+                '<span class="tag ' + s.cls + '">' + s.tag + '</span>' +
+                '<button class="btn primary" type="button" data-accept="'+idx+'">Accept</button>' +
+              '</div>' +
+              '<p>' + s.text + '</p>' +
+              '<p class="note" style="margin:10px 0 0;">Paket: <strong>' + String(pack).toUpperCase() + '</strong> · AI ändert nichts automatisch.</p>';
+            aiOptions.appendChild(box);
+          });
+
+          aiPanel.style.display = "block";
+          aiPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        if (aiBtn) aiBtn.addEventListener("click", renderAi);
+
+        if (aiOptions){
+          aiOptions.addEventListener("click", function(e){
+            var btn = e.target && e.target.closest ? e.target.closest("button[data-accept]") : null;
+            if (!btn) return;
+
+            var idx = Number(btn.getAttribute("data-accept"));
+            var note = $("cnNote");
+            if (!note) return;
+
+            if (idx === 0){
+              note.value = "Wettbewerbsfähige Option gewünscht. Bitte bestätigen Sie den Termin.";
+            } else {
+              note.value = "Sichere Option (mit Puffer) gewünscht. Bitte bestätigen Sie den Termin.";
+            }
+          });
+        }
+
+                // Chat demo
+        var chatOrb = $("cnChatOrb");
+        var chatScrim = $("cnChatScrim");
+        var chatSheet = $("cnChatSheet");
+        var chatClose = $("cnChatClose");
+        var chatSend = $("cnChatSend");
+        var chatInput = $("cnChatInput");
+        var chatLog = $("cnChatLog");
+
+        function openChat(){
+       if(chatScrim) chatScrim.style.display="block";
+       if(chatSheet) chatSheet.style.display="block";
+       _cnLock();
+       if(chatInput) chatInput.focus();
+   }
+       function closeChat(){
+      if(chatScrim) chatScrim.style.display="none";
+     if(chatSheet) chatSheet.style.display="none";
+      _cnUnlock();
+}
+
+        if (chatOrb) chatOrb.addEventListener("click", openChat);
+        if (chatScrim) chatScrim.addEventListener("click", closeChat);
+        if (chatClose) chatClose.addEventListener("click", closeChat);
+
+        function appendMsg(txt){
+          if (!chatLog) return;
+          var p = document.createElement("p");
+          p.className = "msg";
+          p.textContent = txt;
+          chatLog.appendChild(p);
+          chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        if (chatSend){
+          chatSend.addEventListener("click", function(){
+            var v = chatInput ? String(chatInput.value || "").trim() : "";
+            if (!v) return;
+            appendMsg("Sie: " + v);
+            appendMsg("System: Demo-Chat. Kein Versand, keine automatische Antwort.");
+            if (chatInput) chatInput.value = "";
+          });
+        }
+
+    // Scheduler mount (loaded later)
+        window.__CN_SCHED_BOOT = function(){
+          var host = $("cnSchedulerHost");
+          if (!host) return;
+          if (window.CN_SCHED && typeof window.CN_SCHED.mount === "function") {
+            try { window.CN_SCHED.mount("cnSchedulerHost"); } catch (e) {}
+          }
+        };
+      })();
+    </script>
+
+     <script src="/js/scheduler.js" onload="window.__CN_SCHED_BOOT && window.__CN_SCHED_BOOT()"></script>
+     <script src="/js/ui.js"></script>
+     <script src="/js/form-submit.js"></script>
+       
+  <script>
+(function(){
+ "use strict";
+})();
+</script>
+
+</body>
+</html>
