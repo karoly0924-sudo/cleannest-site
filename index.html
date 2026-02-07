@@ -724,6 +724,13 @@ html{ scroll-behavior:smooth; }
           </p>
 
           <form id="cnBookingForm" autocomplete="on">
+            <section id="cnCtaGate" class="cn-cta-gate">
+            <button type="button" id="cnOpenBooking" class="cn-cta-primary">
+                Termin Buchen
+  </button>
+</section>
+
+<section id="cnPackOnly" hidden>
             <div class="formGrid">
               <label>
                 <span style="font-size:12px; color:var(--muted); font-weight:900;">Paket</span>
@@ -733,7 +740,12 @@ html{ scroll-behavior:smooth; }
                   <option value="intensiv">INTENSIV</option>
                 </select>
               </label>
-
+                </div>
+                 </section>
+                  <section id="cnFormRest" hidden>
+                   <div class="formGrid">
+              
+              
               <label>
                 <span style="font-size:12px; color:var(--muted); font-weight:900;">Name</span>
                 <input class="field" id="cnName" name="name" required />
@@ -849,7 +861,8 @@ html{ scroll-behavior:smooth; }
                 Online-Zahlung nur nach bestätigtem Termin und nur durch Ihre aktive Auswahl (keine automatische Abbuchung).
               </p>
             </div>
-          </form>
+           </section>
+           </form>
         </div>
       </div>
     </section>
@@ -1092,6 +1105,30 @@ html{ scroll-behavior:smooth; }
   <script>
 (function(){
  "use strict";
+})();
+</script>
+
+      <script>
+(function(){
+  var btn = document.getElementById("cnOpenBooking");
+  var gate = document.getElementById("cnCtaGate");
+  var packOnly = document.getElementById("cnPackOnly");
+  var rest = document.getElementById("cnFormRest");
+  var pack = document.getElementById("cnPack");
+
+  if(btn){
+    btn.addEventListener("click", function(){
+      gate.hidden = true;
+      packOnly.hidden = false;
+    });
+  }
+  if(pack){
+    pack.addEventListener("change", function(){
+      if(String(pack.value||"").trim()){
+        rest.hidden = false;
+      }
+    });
+  }
 })();
 </script>
 
