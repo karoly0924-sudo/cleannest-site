@@ -1,0 +1,3041 @@
+<!doctype html>
+<html lang="de">
+  <head>
+   <!-- Start cookieyes banner --> <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/24a6186d2ac62fcb1afba0dfb9368996/script.js"></script> <!-- End cookieyes banner -->
+
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="theme-color" content="#0a1022" />
+    <meta name="color-scheme" content="dark light" />
+
+    <title>CleanNest HAUSSERVICE e.U. – für leichtere Tage und ein sauberes Zuhause</title>
+    <meta
+      name="description"
+      content="CleanNest – professionelle Haus-/Wohnungs-Reinigung ausschließlich für Privatkunden (B2C) in    Österreich. Fixpreis-Pakete, transparente Abwicklung und zuverlässiger Haushaltsservice."
+    />
+
+    <link rel="stylesheet" href="/css/scheduler.css">
+    <!-- Replace these with your real assets -->
+    <link rel="icon" href="/assets/brand/favicon.png" />
+    <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+    <link rel="stylesheet" href="/css/ui.css?v=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<style>
+  
+  /* ===== GLOBÁLIS FIX: A hidden attribútum mindent felülír ===== */
+[hidden] { display: none !important; }
+
+  :root{
+    /* ===== SKY (kártyán kívüli háttér) ===== */
+    --sky0:#dceef8;   /* alsó világoskék */
+    --sky1:#0a1430;   /* felső majdnem fehér */
+    --sky2:#9fd4ff;   /* közép kék */
+    --sky3:#2d78c8;   /* mélyebb kék */
+
+    /* ===== TEXT ===== */
+    --tx:rgba(255,255,255,.92);
+    --dim:rgba(255,255,255,.70);
+    --muted:rgba(255,255,255,.55);
+
+    /* ===== CARDS (VISSZA SÖTÉTRE) ===== */
+    --card-glass: rgba(10,16,34,.46);
+    --card-glass2:rgba(10,16,34,.62);
+    --card-brd:rgba(255,255,255,.14);
+
+    /* ===== ACCENTS ===== */
+    --accent:rgba(122,162,255,.95);
+    --good:rgba(93,255,184,.95);
+    --warn:rgba(255,209,102,.95);
+    --bad:rgba(255,107,107,.95);
+
+    --r:18px;
+    --shadow: 0 14px 40px rgba(0,0,0,.35);
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+
+  body{
+    margin:0;
+    color:var(--tx);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Helvetica,Arial,sans-serif;
+
+    /* ===== ÉGBOLT (kártyán kívül) ===== */
+    background:
+      radial-gradient(900px 520px at 20% 12%, rgba(255,255,255,.06), transparent 62%),
+      radial-gradient(1100px 620px at 80% 10%, rgba(255,255,255,.04), transparent 64%),
+      radial-gradient(1200px 780px at 50% 35%, rgba(159,212,255,.45), transparent 60%),
+      radial-gradient(1400px 900px at 50% 95%, rgba(45,120,200,.30), transparent 65%),
+      linear-gradient(180deg, var(--sky1) 0%, var(--sky0) 45%, rgba(159,212,255,.55) 68%, rgba(45,120,200,.45) 100%);
+
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ===== Buborékok: csak háttérre (nem kártyára) ===== */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+
+    background:
+      radial-gradient(12px 12px at 12% 22%, rgba(255,255,255,.18), transparent 62%),
+      radial-gradient(18px 18px at 22% 44%, rgba(255,255,255,.16), transparent 62%),
+      radial-gradient(10px 10px at 34% 28%, rgba(255,255,255,.14), transparent 62%),
+      radial-gradient(22px 22px at 46% 52%, rgba(255,255,255,.16), transparent 62%),
+      radial-gradient(14px 14px at 58% 34%, rgba(255,255,255,.14), transparent 62%),
+      radial-gradient(26px 26px at 70% 58%, rgba(255,255,255,.16), transparent 62%),
+      radial-gradient(16px 16px at 82% 30%, rgba(255,255,255,.14), transparent 62%),
+      radial-gradient(20px 20px at 88% 48%, rgba(255,255,255,.15), transparent 62%),
+      radial-gradient(12px 12px at 18% 78%, rgba(255,255,255,.12), transparent 62%),
+      radial-gradient(24px 24px at 74% 82%, rgba(255,255,255,.12), transparent 62%);
+    opacity:.9;
+  }
+
+  /* Oldal tartalom mindig a buborék réteg fölött */
+  .wrap{ width:min(1120px, calc(100% - 32px)); margin:0 auto; position:relative; z-index:1; }
+  a{ color:inherit; }
+
+  /* ===== Glass helpers (KÁRTYÁK SÖTÉTEK) ===== */
+  .glass{
+    background: linear-gradient(180deg, var(--card-glass2), var(--card-glass));
+    border:1px solid var(--card-brd);
+    border-radius: var(--r);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: var(--shadow);
+    position:relative;
+    z-index:1;
+  }
+
+  .btn{
+    appearance:none;
+    border:1px solid rgba(255,255,255,.16);
+    background: rgba(10,16,34,.18);
+    color:var(--tx);
+    border-radius:14px;
+    padding:6px 12px;
+    font-weight:800;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+  }
+  .btn.primary{
+    background: rgba(122,162,255,.22);
+    border-color: rgba(122,162,255,.38);
+  }
+  .btn.ghost{
+    background: rgba(10,16,34,.14);
+    border-color: rgba(255,255,255,.14);
+  }
+
+ /* === GOLD for "choose" buttons only === */
+.btn.choose{
+  border: 1px solid rgba(0,0,0,.12);
+  background: linear-gradient(180deg, #f3d17a, #c49b46);
+  color:#0f1216;
+  box-shadow: 0 10px 24px rgba(196,155,70,.28), 0 6px 14px rgba(0,0,0,.18);
+}
+.btn.choose:active{ transform: translateY(1px); }
+.btn.choose:focus{
+  outline:none;
+  box-shadow: 0 0 0 4px rgba(196,155,70,.35), 0 10px 24px rgba(196,155,70,.28), 0 6px 14px rgba(0,0,0,.18);
+}
+
+/* === GOLD for selected size card (uses .primary in your JS) === */
+#cnSizeCards .btn.primary{
+  border: 1px solid rgba(0,0,0,.12);
+  background: linear-gradient(180deg, #f3d17a, #c49b46);
+  color:#0f1216;
+  box-shadow: 0 10px 24px rgba(196,155,70,.28), 0 6px 14px rgba(0,0,0,.18);
+}
+#cnSizeCards .btn.primary:active{ transform: translateY(1px); }
+
+.pill{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(10,16,34,.14);
+  font-size:13px;
+  color:var(--dim);
+  white-space:nowrap;
+}
+.pill.strong{
+  color:var(--tx);
+  border-color: rgba(93,255,184,.30);
+  background: rgba(93,255,184,.10);
+}
+
+/* Hero */
+section.hero{ padding:28px 0 12px; }
+.heroGrid{ display:grid; grid-template-columns: 1fr; gap:14px; }
+.heroMain{ padding:18px; }
+.heroSide{ padding:18px; }
+h1{ margin:0; font-size: clamp(28px, 4.4vw, 46px); letter-spacing:-.7px; }
+.lead{ margin:12px 0 0; color:var(--dim); font-size:16px; line-height:1.55; }
+.badgeRow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+.ctaRow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+
+/* Big brand orb (no people) */
+.brandOrb{
+  position:relative;
+  width:100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r);
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.14);
+  background:
+    radial-gradient(420px 240px at 50% 20%, rgba(255,255,255,.14), transparent 62%),
+    radial-gradient(520px 320px at 50% 80%, rgba(10,16,34,.22), transparent 62%),
+    linear-gradient(180deg, rgba(255,255,255,.08), rgba(10,16,34,.14));
+}
+.orbInner{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; transform: translateY(-6px); }
+.orbLogo{ width:min(270px, 70%); height:auto; filter: drop-shadow(0 18px 44px rgba(0,0,0,.35)); opacity:.95; }
+
+/* === OPTION A: Dark Glass Emphasis Strip (BASE) === */
+.cnFocusNote{
+  position:relative;
+  padding:16px 16px 16px 18px;
+  border-radius:16px;
+  background: rgba(10,16,34,.26);
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 18px 44px rgba(0,0,0,.28);
+}
+
+.cnFocusNote:before{
+  content:"";
+  position:absolute;
+  left:10px;
+  top:12px;
+  bottom:12px;
+  width:3px;
+  border-radius:999px;
+  background: linear-gradient(180deg, rgba(196,155,70,.60), rgba(196,155,70,.18));
+}
+
+.cnFocusTitle{
+  margin:0 0 8px 0;
+  font-weight:900;
+  font-size:16px;
+  letter-spacing:-.2px;
+  color: var(--tx);
+}
+
+.cnFocusText{
+  margin:0;
+  font-size:14px;
+  line-height:1.55;
+  color: var(--dim);
+}
+
+.cnFocusList{
+  margin:0 0 10px 0;
+  padding:0;
+  list-style:none;
+}
+
+.cnFocusList li{
+  margin:6px 0;
+  padding-left:14px;
+  position:relative;
+  font-size:14px;
+  line-height:1.5;
+  color: var(--dim);
+}
+
+.cnFocusList li:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.62em;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background: rgba(196,155,70,.55);
+  box-shadow: 0 0 0 3px rgba(196,155,70,.12);
+  transform: translateY(-50%);
+}
+
+.cnFocusDivider{
+  margin:12px 0;
+  height:1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
+}
+
+/* === OPTION A – DARKER PRO GLASS + SOFT PULSE ACCENT (ADD-ON) === */
+.cnFocusNotePro{
+  position:relative;
+  padding:16px 16px 16px 20px;
+  border-radius:16px;
+  background: rgba(6,10,22,.48);
+  border:1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 22px 56px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.cnFocusNotePro:before{
+  content:"";
+  position:absolute;
+  left:10px;
+  top:14px;
+  bottom:14px;
+  width:3px;
+  border-radius:999px;
+  background: linear-gradient(
+    180deg,
+    rgba(196,155,70,.65),
+    rgba(196,155,70,.25)
+  );
+  animation: cnGoldPulse 3.6s ease-in-out infinite;
+}
+
+@keyframes cnGoldPulse{
+  0%{
+    box-shadow:
+      0 0 0 rgba(196,155,70,.15),
+      0 0 0 rgba(196,155,70,0);
+    opacity:.85;
+  }
+  50%{
+    box-shadow:
+      0 0 12px rgba(196,155,70,.35),
+      0 0 28px rgba(196,155,70,.18);
+    opacity:1;
+  }
+  100%{
+    box-shadow:
+      0 0 0 rgba(196,155,70,.15),
+      0 0 0 rgba(196,155,70,0);
+    opacity:.85;
+  }
+}
+
+/* Sections */
+section.block{ padding:14px 0; }
+.h2{ margin:0 0 12px; font-size:20px; letter-spacing:-.2px; }
+.grid3{ display:grid; grid-template-columns: 1fr; gap:12px; }
+.card{ padding:14px; }
+.card h3{ margin:0 0 8px; font-size:16px; }
+.card p{ margin:0; color:var(--dim); font-size:14px; line-height:1.55; }
+.note{ color:var(--muted); font-size:12px; line-height:1.45; }
+
+/* Booking */
+form label{ 
+ display:block; 
+ color: #d4b46a;   
+}
+.field{
+  width:100%;
+  padding:12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.28);
+  background: rgba(10,16,34,.55);
+  color:#d4b46a;
+  font-weight: 700;
+  outline:none;
+}
+.field:focus{ border-color: rgba(122,162,255,.45); box-shadow: 0 0 0 3px rgba(122,162,255,.14); }
+.formGrid{ display:grid; grid-template-columns: 1fr; gap:10px; }
+
+/* ===== Booking CTA Gate (Website-CTA) ===== */
+.cn-cta-gate{
+  display:block;
+  margin: 4px 0 12px;
+}
+
+.cn-cta-primary{
+  width:100%;
+  appearance:none;
+  border:1px solid rgba(0,0,0,.12);
+  background: linear-gradient(180deg, #f3d17a, #c49b46);
+  color:#0f1216;
+  border-radius: 16px;
+  padding: 14px 16px;
+  font-weight: 950;
+  font-size: 16px;
+  letter-spacing: .2px;
+  text-align:center;
+  cursor:pointer;
+  box-shadow: 0 12px 28px rgba(196,155,70,.35), 0 6px 14px rgba(0,0,0,.22);
+}
+
+.cn-cta-primary:active{
+  transform: translateY(1px);
+}
+
+.cn-cta-primary:focus{
+  outline:none;
+  box-shadow: 0 0 0 4px rgba(196,155,70,.35), 0 12px 28px rgba(196,155,70,.35), 0 6px 14px rgba(0,0,0,.22);
+}
+
+/* Footer */
+footer{
+  margin-top:18px;
+  padding:22px 0 34px;
+  border-top:1px solid rgba(255,255,255,.10);
+  background: linear-gradient(
+    to bottom,
+    rgba(10,16,34,.92),
+    rgba(10,16,34,.98)
+  );
+}
+.footGrid{ display:grid; grid-template-columns: 1fr; gap:12px; }
+.legalLinks{ display:flex; flex-wrap:wrap; gap:12px; color:var(--muted); }
+.legalLinks a{ color:var(--muted); text-decoration: underline; }
+
+/* Chat orb */
+.chatOrb{
+  position:fixed;
+  right:14px;
+  bottom:14px;
+  width:56px;
+  height:56px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.22), rgba(122,162,255,.18));
+  box-shadow: 0 18px 46px rgba(0,0,0,.38);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:80;
+  cursor:pointer;
+}
+.chatOrb svg{ opacity:.95; }
+.chatSheetScrim{
+  position:fixed; inset:0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display:none;
+  z-index:85;
+}
+.chatSheet{
+  position:fixed;
+  left:12px; right:12px; bottom:12px;
+  height:min(70vh, 560px);
+  display:none;
+  z-index:90;
+  padding:12px;
+}
+.chatHead{
+  display:flex; justify-content:space-between; align-items:center;
+  gap:10px; padding:10px 10px 12px;
+}
+.chatTitle{ font-weight:900; }
+.chatBody{
+  height: calc(100% - 56px);
+  display:flex; flex-direction:column;
+  gap:10px;
+  padding:0 10px 10px;
+}
+.chatLog{
+  flex:1;
+  overflow:auto;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:16px;
+  background: rgba(255,255,255,.04);
+  padding:10px;
+}
+.msg{ margin:0 0 8px; color:var(--dim); font-size:13px; line-height:1.45; }
+.chatInputRow{ display:flex; gap:10px; }
+.chatInputRow input{ flex:1; }
+
+/* =========================================================
+   TOPBAR – ETALON (SINGLE SYSTEM, NO DUPES, NO desktopNav)
+   Left: a.brand > img.brandLogoSmall (fixed size, not moved)
+   Center: .heroMark (stable centered)
+   Right: #cnHamb (neon green darker)
+          .topbarCta (small gold)
+          .phoneNum (red neon)
+   ========================================================= */
+
+nav.desktopNav,
+.desktopNav,
+#desktopNav{
+  display:none !important;
+}
+
+header.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  background:
+    radial-gradient(220px 150px at 15% 40%, rgba(52,183,255,.18), transparent 65%),
+    radial-gradient(180px 130px at 15% 40%, rgba(31,174,91,.14), transparent 70%),
+    linear-gradient(180deg, rgba(10,16,34,.85), rgba(10,16,34,.95));
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: 0 10px 35px rgba(0,0,0,.55);
+}
+
+header.topbar .topbarWrap{
+  width: min(1120px, calc(100% - 24px));
+  margin: 0 auto;
+  padding: 8px 0;
+}
+
+header.topbar .toprow{
+  display:grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto auto;
+  grid-template-areas:"brand hero hamb"
+    "brand hero actions";
+  align-items:center;
+  column-gap: 12px;
+  min-height: 72px;
+}
+
+/* LEFT: brand (no moving, only fixed size) */
+header.topbar a.brand{
+  position: static;
+  display:inline-flex;
+  align-items:center;
+  text-decoration:none;
+  line-height:0;
+}
+
+header.topbar a.brand{
+    grid-area:brand;
+}
+
+header.topbar img.brandLogoSmall{
+  display:block;
+  height: 88px;
+  width:auto;
+  max-width: 190px;
+  object-fit: contain;
+}
+
+/* CENTER: heroMark stable centered */
+header.topbar .heroMark{
+  position: static;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding-left: 0;
+  pointer-events:none;
+  justify-self: center;
+  text-align: center;
+}
+
+header.topbar .heroMark{
+    grid-area: hero;
+    grid-column: 2;
+}
+
+/* FIX: heroMark-ot NE mozgassa semmilyen inline transform (mobil/PC tükörképhez) */
+header.topbar .heroMark{
+  transform: none !important;
+}
+header.topbar .heroMark[style]{
+  transform: none !important;
+}
+
+/* RIGHT: stacked controls */
+header.topbar .actions{
+  position: static;
+  
+  display:flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  
+  grid-area: actions;
+}
+
+/* #cnHamb neon green darker */
+#cnHamb{
+ position: static;
+ 
+  appearance:none;
+  border: 1px solid rgba(25,255,140,.55);
+  background: rgba(9,22,18,.45);
+  color: #59ffb3;
+  border-radius: 14px;
+  padding: 8px 10px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow:
+    0 0 0 3px rgba(25,255,140,.10),
+    0 10px 26px rgba(0,0,0,.35),
+    0 0 22px rgba(25,255,140,.28);
+  grid-area: hamb;
+}
+
+#cnHamb:active{
+  transform: scale(0.98);
+}
+
+/* CTA small gold */
+header.topbar .btn.primary.topbarCta{
+  padding:6px 10px;
+  font-size:13px;
+  font-weight:950;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.14);
+  background: linear-gradient(180deg, #f3d17a, #c49b46);
+  color:#0f1216;
+  box-shadow:
+    0 10px 22px rgba(196,155,70,.26),
+    0 6px 14px rgba(0,0,0,.18);
+}
+
+/* phone red neon */
+header.topbar .phoneLink{
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:flex-end;
+}
+
+header.topbar .phoneNum{
+  font-size: 13px;
+  font-weight: 800;
+  color:#ff3b3b;
+  text-shadow:
+    0 0 10px rgba(255,59,59,.42),
+    0 0 18px rgba(255,59,59,.22);
+  animation: phoneBreath 3.2s ease-in-out infinite;
+}
+
+@keyframes phoneBreath{
+  0%   { opacity: .65; }
+  50%  { opacity: 1; }
+  100% { opacity: .65; }
+}
+
+/* ===== TOPBAR: heroMark wordmark (heroBanner) explicit sizing ===== */
+header.topbar .heroMark{
+  min-width: 0;
+  overflow: visible;
+}
+
+header.topbar .heroMark .heroBanner{
+  display:block;
+  width:auto;
+  height: 56px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Mobilon is ugyanaz a logika, csak biztonságosabb tér */
+@media (max-width: 520px){
+  header.topbar .heroMark{
+    padding: 0 6px;
+  }
+  header.topbar .heroMark .heroBanner{
+    height: 52px;
+  }
+}
+
+/* ===== MOBILE MENU OVERLAY (FIXED) ===== */
+.mobileMenuScrim{
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 120;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.mobileMenu{
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  top: 88px;                 /* header alatt */
+  max-height: calc(100vh - 110px);
+  overflow: auto;
+  display: none;
+  z-index: 130;
+}
+
+.mobileMenu .row{
+  display: grid;
+  gap: 10px;
+}
+
+.mobileMenu a{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 16px;
+  border-radius:14px;
+  text-decoration:none;
+
+  border:1px solid rgba(255,255,255,.18);
+  background: rgba(6,10,22,.65); /* sötétebb */
+
+  color:#eaf1ff; /* nem vakító fehér */
+  font-weight:900;
+  font-size:15px;
+  letter-spacing:.3px;
+
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+@media (min-width: 900px){
+  .heroGrid{ grid-template-columns: 1fr; }
+  .grid3{ grid-template-columns: 1fr; }
+  .footGrid{ grid-template-columns: 1fr; align-items:start; }
+}
+
+html{ scroll-behavior:smooth; }
+
+.bookingTitle{
+  color:#F0ECE6;
+  font-weight:900;
+  text-shadow:
+    0 2px 6px rgba(0,0,0,.55),
+    0 0 18px rgba(0,0,0,.35);
+  background: linear-gradient(
+    180deg,
+    rgba(10,16,34,.75),
+    rgba(10,16,34,.35)
+  );
+  padding: 10px 14px;
+  border-radius: 14px;
+}
+
+/* Csomagválasztó gomb – arany ONLY */
+.btn.choose:hover,
+.btn.choose:active{
+  background: linear-gradient(180deg, #f7d774 0%, #d4a72c 100%);
+  border-color: #f1c84b;
+  color:#1a1a1a;
+  box-shadow:
+    0 6px 18px rgba(241,200,75,.35),
+    0 2px 6px rgba(0,0,0,.25);
+  transform: translateY(-1px);
+}
+
+/* Mobil tap érzet */
+.btn.choose:active{
+  transform: translateY(0);
+  box-shadow:
+    0 3px 10px rgba(241,200,75,.35);
+}
+
+/* ===== MOBILE: prevent overlap (hero must shrink, no bleed into brand) ===== */
+@media (max-width: 520px){
+
+  header.topbar .toprow{
+    grid-template-columns: auto minmax(0,1fr) auto;
+  }
+
+  header.topbar img.brandLogoSmall{
+    height: 52px;
+    max-width: 120px;
+  }
+
+  header.topbar .heroMark{
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  header.topbar .heroMark *{
+    max-width: 100%;
+  }
+
+  header.topbar .actions{
+    min-width: 0;
+  }
+
+  header.topbar .phoneNum{
+    font-size: 12px;
+  }
+}
+
+/* ===== TOPBAR MOBILE FIX: center ne lógjon rá a brandre ===== */
+header.topbar .toprow > *{
+  min-width: 0;
+}
+
+header.topbar .heroMark{
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+header.topbar .heroMark *{
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* ha a felirat egyetlen sorban akarna maradni és ezért lóg át,
+   akkor engedjük törni mobilon */
+@media (max-width: 520px){
+  header.topbar .heroMark{
+    padding: 0 6px;
+  }
+  header.topbar .heroMark *{
+    white-space: normal;
+  }
+}
+
+/* ===== CENTER WORDMARK STYLE (NO IMAGE) ===== */
+
+header.topbar .heroTextLogo{
+  text-align:center;
+  line-height:1.05;
+  font-weight:700;
+}
+
+/* CLEAN – kék gradient */
+header.topbar .tClean{
+  background: linear-gradient(90deg,#2f7dd1 0%,#3a9eea 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  color:transparent;
+}
+
+/* NEST – zöld gradient */
+header.topbar .tNest{
+  background: linear-gradient(90deg,#3fbf6c 0%,#67d04b 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  color:transparent;
+}
+
+/* HAUSSERVICE e.U. – narancs */
+header.topbar .heroLine2{
+  margin-top:4px;
+  font-weight:700;
+  letter-spacing:1px;
+  background: linear-gradient(90deg,#e28a2f 0%,#f39a3c 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  color:transparent;
+}
+
+.cnFixpriceField{
+  margin: 12px 0 16px;
+}
+
+.cnFixpriceField input{
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: .2px;
+  padding: 14px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.10);
+  color: #eaf1ff;
+  box-shadow: 0 10px 26px rgba(0,0,0,.18);
+}
+
+.cnFixpriceHint{
+  margin-top: 6px;
+  font-size: 12px;
+  opacity: .75;
+}
+
+/* Collapsible warning block (PC + Mobile 1:1) */
+.cnWarnDetails{
+  overflow:hidden;
+  border-radius:14px;
+}
+
+.cnWarnSummary{
+  list-style:none;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  padding:14px;
+  border-radius:14px;
+  font-weight:950;
+  line-height:1.15;
+  color:#1b1400;
+  background: linear-gradient(180deg,#FFD84D,#FFB300);
+  box-shadow: 0 8px 22px rgba(255,180,0,.35);
+  animation: warnPulse 1.2s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
+  user-select:none;
+}
+
+.cnWarnSummary::-webkit-details-marker{
+  display:none;
+}
+
+.cnWarnSub{
+  display:block;
+  font-size:12px;
+  font-weight:900;
+  opacity:.85;
+}
+
+.cnWarnBody{
+  padding:14px;
+}
+
+.cnWarnDetails[open] .cnWarnSummary{
+  animation:none;
+  box-shadow: 0 12px 30px rgba(255,180,0,.5);
+}
+
+@keyframes warnPulse{
+  0%   { transform:scale(1); box-shadow: 0 8px 20px rgba(255,180,0,.30); }
+  50%  { transform:scale(1.02); box-shadow: 0 16px 40px rgba(255,180,0,.60); }
+  100% { transform:scale(1); box-shadow: 0 8px 20px rgba(255,180,0,.30); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .cnWarnSummary{ animation:none; }
+}
+
+.cnFixNote{
+  margin-top:12px;
+  padding:14px 14px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.16);
+  background: rgba(6,10,22,.46);
+  box-shadow: 0 18px 44px rgba(0,0,0,.30), inset 0 1px 0 rgba(255,255,255,.06);
+  color: var(--tx);
+  font-weight: 900;
+  line-height: 1.5;
+}
+
+/* ===== PAKETE TOGGLE – STRONG CTA ===== */
+.cnPakToggleBtn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin:10px 0 14px;
+
+  padding:12px 24px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.28);
+
+  background:linear-gradient(135deg,#2f7dd1 0%, #3fbf6c 100%);
+  color:#F0ECE6;
+
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.35),
+    0 4px 12px rgba(0,0,0,.25);
+
+  transition:transform .18s ease, box-shadow .25s ease;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+
+.cnPakToggleBtn:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 16px 36px rgba(0,0,0,.45),
+    0 8px 18px rgba(0,0,0,.35);
+}
+
+.cnPakToggleBtn:active{
+  transform:scale(.98);
+}
+
+/* ===== PAKETE PANEL COLLAPSE (FIX: "looks open" / overflow) ===== */
+#cnPakPanel{
+  max-height:0px;        /* zárt alapállapot */
+  overflow:hidden;       /* ez hiányzott: ettől nem lóg ki a tartalom */
+  transition:max-height .25s ease;
+}
+
+/* opcionális biztonsági: zárt állapotban is maradjon zárt */
+#cnPakPanel[aria-hidden="true"]{
+  max-height:0px;
+}
+
+/* ===== BUCHUNG: FULL GLASS BACKDROP (fix washed-out layer) ===== */
+
+/* 1) A teljes #buchung terület kapjon enyhe sötét üveget */
+#buchung{
+  background: rgba(18,16,14,.35) !important; /* meleg charcoal, nem kék */
+  backdrop-filter: blur(6px) !important;
+}
+
+/* 2) Minden “doboz” a foglalásban kapjon egységes sötét glass-t */
+#buchung .glass,
+#buchung .glass-card,
+#buchung .block,
+#buchung .wrap,
+#buchung .card,
+#buchung .cn-cta-gate,
+#buchung #cnPackOnly,
+#buchung #cnSizeWrap,
+#buchung #cnFormRest,
+#buchung #cnExtraOptions{
+  background: rgba(18,16,14,.72) !important; /* ez szedi le a kimosást */
+  backdrop-filter: blur(8px) !important;
+}
+
+  #buchung select,
+  #buchung input,
+  #buchung textarea{
+  background: rgba(18,16,14,.55) !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+#buchung input::placeholder,
+#buchung textarea::placeholder{
+  color: rgba(255,255,255,.55) !important;
+  -webkit-text-fill-color: rgba(255,255,255,.55) !important;
+}
+
+/* 4) A “Fixpreis: …” sor ne mosódjon el */
+#buchung .cn-fixedPriceHint,
+#buchung .cn-priceHint,
+#buchung .hint,
+#buchung small{
+  opacity: 1 !important;
+}
+
+ .footerCounter{
+  margin-top: 30px;
+  display:flex;
+  justify-content:center;
+}
+
+.footerCounterInner{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 22px;
+  border-radius:16px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border:1px solid rgba(255,255,255,0.15);
+  font-size:18px;
+  font-weight:600;
+  letter-spacing:.3px;
+}
+
+.fcIcon{
+  font-size:20px;
+}
+
+.fcLabel{
+  opacity:.85;
+}
+
+.fcNumber{
+  font-size:22px;
+  font-weight:700;
+  color: var(--good);
+}
+
+[hidden]{ display:none !important; }
+
+.cn-window-hinweis{
+  background:#ffe08a !important;
+  color:#000 !important;
+  padding:6px 8px !important;
+  border-radius:8px !important;
+  font-size:13px !important;
+  line-height:1.35 !important;
+  margin:6px 0 !important;
+  border:1px solid #e2b400 !important;
+}
+
+.cn-window-hinweis .cn-minimum{
+  display:block !important;
+  margin-top:6px !important;
+  padding:6px 10px !important;
+  font-weight:900 !important;
+  font-size:14px !important;
+  background:linear-gradient(135deg, #1f2a44, #2d3b63) !important;
+  color:#ffffff !important;
+  border-radius:8px !important;
+  border:2px solid #162038 !important;
+  box-shadow:0 3px 10px rgba(0,0,0,0.22) !important;
+  letter-spacing:0.3px !important;
+}
+
+.cnPromoGlow{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(243,209,122,.55);
+  background:linear-gradient(135deg, rgba(243,209,122,.12), rgba(196,155,70,.18));
+  animation: cnPromoPulse 2.8s ease-in-out infinite;
+}
+
+.cnPromoGlow::before{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+  background:radial-gradient(circle, rgba(243,209,122,.25) 0%, transparent 60%);
+  animation: cnPromoRotate 8s linear infinite;
+}
+
+.cnPromoTitle{
+  font-weight:950;
+  font-size:18px;
+  letter-spacing:.5px;
+  color:#f3d17a;
+  text-shadow:0 0 12px rgba(243,209,122,.6);
+}
+
+@keyframes cnPromoPulse{
+  0%,100%{ box-shadow:0 0 12px rgba(243,209,122,.25); }
+  50%{ box-shadow:0 0 28px rgba(243,209,122,.6); }
+}
+
+@keyframes cnPromoRotate{
+  0%{ transform:rotate(0deg); }
+  100%{ transform:rotate(360deg); }
+}
+
+.cnPriceToggleBtn{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:8px 12px;
+  border-radius:10px;
+  font-weight:900;
+  font-size:13px;
+  cursor:pointer;
+  border:none;
+
+  background:linear-gradient(135deg,#f3d17a,#c49b46);
+  color:#111;
+
+  box-shadow:0 4px 12px rgba(243,209,122,0.25);
+  transition:all .25s ease;
+}
+
+.cnPriceToggleBtn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 28px rgba(243,209,122,0.55);
+}
+
+.cnPriceToggleBtn:active{
+  transform:scale(.98);
+}
+
+</style>
+   </head>
+
+<body>
+     <header class="topbar">
+  <div class="topbarWrap">
+    <div class="toprow">
+
+      <div class="heroMark" aria-hidden="true">
+       <div class="heroTextLogo" role="img" aria-label="CleanNest HAUSSERVICE e.U.">
+        <div class="heroLine1">
+         <span class="tClean">Clean</span><span class="tNest">Nest</span>
+      </div>
+       <div class="heroLine2">HAUSSERVICE e.U.</div>
+       </div>
+       </div>
+      <a class="brand" href="#home" aria-label="CleanNest Startseite">
+        <img src="/assets/brand/logo.png" class="brandLogoSmall" alt="CleanNest Logo" />
+      </a>
+
+      <div class="actions">
+        <a class="btn primary topbarCta" href="#buchung" aria-label="Online buchen">Online buchen</a>
+        <a class="phoneLink" href="tel:+436706513480" aria-label="Telefon">
+          <span class="phoneNum">+43 670 651 3480</span>
+        </a>
+      </div>
+
+      <button class="btn hamb" id="cnHamb" type="button" aria-label="Menü öffnen">Menü</button>
+
+    </div>
+  </div>
+</header>
+
+             <!-- Mobile Menu -->
+  <div class="mobileMenuScrim" id="cnMenuScrim"></div>
+  <div class="mobileMenu glass" id="cnMenu" role="dialog" aria-label="Menü">
+    <div class="row">
+      <a href="#home" data-closemenu="1">Home <span style="color:#f3d17a; font-weight:900;">›</span></a>
+      <a href="#pakete" data-closemenu="1">Pakete <span style="color:#f3d17a; font-weight:900;">›</span></a>
+      <a href="#preise" data-closemenu="1">Preise <span style="color:#f3d17a; font-weight:900;">›</span></a>
+      <a href="#kontakt" data-closemenu="1">Kontakt <span style="color:#f3d17a; font-weight:900;">›</span></a>
+      <a href="/impressum.html">Impressum <span style="color:#f3d17a; font-weight:900;">›</span></a>
+      <a href="/datenschutz.html">Datenschutz <span style="color:#f3d17a; font-weight:900;">›</span></a>
+      <a href="/agb.html">AGB <span style="color:#f3d17a; font-weight:900;">›</span></a>
+    </div>
+    <div style="height:10px"></div>
+    <button class="btn" id="cnMenuClose" type="button" style="width:100%; justify-content:center;">Schließen</button>
+  </div>
+
+    <main id="home">
+  <section class="hero">
+    <div class="wrap">
+      <div class="heroGrid">
+
+        <div class="heroMain glass">
+          <h1>Ihre professionelle Reinigung<br/>für ein glänzendes Zuhause</h1>
+          <p class="lead">
+            Haus- und Wohnungsreinigung <strong>ausschließlich für Privatkunden (B2C)</strong> in Österreich.
+            Fixpreis-Pakete, transparente Abwicklung und zuverlässiger Haushaltsservice.
+          </p>
+
+          <div class="badgeRow" aria-label="Hinweise">
+            <span class="pill strong">✅ Nur für Privatkunden (B2C)</span>
+            <span class="pill">📍 Niederösterreich &amp; Wien</span>
+            <span class="pill">💶 Fixpreise · keine Stundenabrechnung</span>
+          </div>
+
+          <div class="ctaRow">
+            <a class="btn primary" href="#pakete">Pakete ansehen</a>
+            <a class="btn" href="#buchung">Termin anfragen</a>
+          </div>
+
+          <p class="note" style="margin-top:12px;">
+            Hinweis: Keine gewerblichen/industriellen Reinigungen und keine genehmigungspflichtigen Tätigkeiten.
+          </p>
+        </div>
+
+        <aside class="heroSide" aria-label="Hinweis">
+          <div class="cnFocusNote cnFocusNotePro" role="note" aria-label="Wichtige Hinweise">
+
+            <div class="cnFocusTitle">Ideale Wahl, wenn…</div>
+            <ul class="cnFocusList">
+              <li>Sie eine <strong>Privatwohnung</strong> haben (B2C)</li>
+              <li>Sie einen <strong>Fixpreis</strong> ohne Überraschungen möchten</li>
+              <li>Sie einen <strong>zuverlässigen</strong> Anbieter suchen</li>
+            </ul>
+
+            <div class="cnFocusDivider" aria-hidden="true"></div>
+
+            <div class="cnFocusTitle">Wichtig zu wissen</div>
+            <div class="cnFocusText">
+              Keine gewerblichen/industriellen Reinigungen und keine genehmigungspflichtigen Tätigkeiten.
+              Wir arbeiten ausschließlich für <strong>Privatkunden (B2C)</strong> – klarer Fokus, transparente Abläufe.
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+      
+  <div class="glass card" style="padding:14px;">
+    <h3>So funktioniert’s</h3>
+    <p>1) Paket wählen · 2) Termin anfragen · 3) Bestätigung erhalten · 4) Optional online zahlen</p>
+  </div>
+
+  <div style="height:12px"></div>
+
+  <div class="glass card" style="padding:14px;">
+    <h3>Privatkunden-Only</h3>
+    <p>Wir arbeiten ausschließlich für private Haushalte (B2C). Gewerbliche/industrielle Anfragen werden nicht angenommen.</p>
+  </div>
+
+ <section id="pakete" class="block">
+  <div class="wrap">
+    <h2 class="h2">Pakete</h2>
+
+ <div id="cnPromoBadge" class="glass card" style="padding:12px; margin:10px 0 14px; border:1px solid rgba(243,209,122,.35); position:relative; overflow:hidden;">
+  <div aria-hidden="true" style="position:absolute; inset:-2px; pointer-events:none; background:radial-gradient(600px 240px at 20% 30%, rgba(243,209,122,.22), transparent 60%), radial-gradient(520px 200px at 80% 70%, rgba(196,155,70,.18), transparent 62%); filter:blur(6px); opacity:.95;"></div>
+
+  <div style="position:relative; display:flex; align-items:center; gap:10px;">
+    <div aria-hidden="true" style="width:10px; height:10px; border-radius:999px; background:rgba(243,209,122,.95); box-shadow:0 0 0 6px rgba(243,209,122,.14), 0 0 24px rgba(243,209,122,.35);"></div>
+
+    <div style="font-weight:950; font-size:16px; color:var(--tx); letter-spacing:.2px;">
+      🔥 Startaktion: –15% Rabatt (bis 01.04.2026)
+    </div>
+  </div>
+
+  <div style="position:relative; margin-top:6px; font-weight:850; color:var(--dim); line-height:1.35;">
+    Gilt für alle Pakete – ausgenommen: Fensterreinigung &amp; Stiegenhaus.
+  </div>
+
+  <div aria-hidden="true" style="position:absolute; left:-20%; top:0; width:60%; height:100%; transform:skewX(-18deg); background:linear-gradient(90deg, transparent, rgba(255,255,255,.10), transparent); opacity:.55; animation:cnPromoShine 2.2s ease-in-out infinite;"></div>
+</div>
+
+    <!-- TOGGLE BUTTON -->
+    <button
+      type="button"
+      id="cnPakToggle"
+      class="cnPakToggleBtn"
+      aria-expanded="false"
+      aria-controls="cnPakPanel"
+    >PAKETE</button>
+
+    <!-- TOGGLE ROOT -->
+    <div class="cnPakRoot" id="cnPakRoot" data-open="0">
+      <div class="cnPakPanel" id="cnPakPanel" aria-hidden="true">
+        <div class="cnPakInner">
+
+          <div class="grid3" role="list" aria-label="Pakete">
+
+            <article class="glass card" role="listitem">
+              <h3>BASIC</h3>
+              <p>
+                Für durchschnittlich gepflegte Wohnungen. Grundreinigung: Staubsaugen, Wischen, Staubwischen.
+                Küche &amp; Bad: Basisflächen (Arbeitsplatte, Spüle, Waschbecken, WC, Dusche/Badewanne).
+                Sichtflächen ordnen, Mülleimer leeren.
+              </p>
+              <div class="ctaRow">
+                <a class="btn choose" href="#buchung" data-pack="basic">BASIC wählen</a>
+              </div>
+            </article>
+
+            <article class="glass card" role="listitem">
+              <h3>STANDARD</h3>
+              <p>
+                Für gründlichere, detailliertere Reinigung. Enthält alles aus BASIC.
+                Küche &amp; Bad intensiver, mehr Teilflächen, sichtbar frischeres Ergebnis.
+              </p>
+              <div class="ctaRow">
+                <a class="btn choose" href="#buchung" data-pack="standard">STANDARD wählen</a>
+              </div>
+            </article>
+
+            <article class="glass card" role="listitem">
+              <h3>INTENSIV</h3>
+              <p>
+                Für stark verschmutzte oder lange nicht gereinigte Wohnungen. Enthält alles aus STANDARD.
+                Fokus auf Problemzonen. Behandlung von Fett-, Kalk- und Ablagerungen (je nach Zustand und Oberfläche).
+              </p>
+              <div class="ctaRow">
+                <a class="btn choose" href="#buchung" data-pack="intensiv">INTENSIV wählen</a>
+              </div>
+            </article>
+
+            <article class="glass card" role="listitem">
+              <h3>AUFFRISCHUNG</h3>
+              <p>
+                Schnelle Auffrischung für grundsätzlich saubere Haushalte. Staubsaugen, Wischen, Hauptflächen.
+                Küche &amp; Bad kurz und effizient.
+              </p>
+              <div class="ctaRow">
+                <a class="btn choose" href="#buchung" data-pack="refresh">AUFFRISCHUNG wählen</a>
+              </div>
+            </article>
+
+            <article class="glass card" role="listitem">
+              <h3>REGELMÄßIG</h3>
+              <p>
+                Für regelmäßige Reinigung (2–6× pro Woche). BASIC-Inhalt als laufende Pflege.
+                Ziel: dauerhaft sauberer, ordentlicher Haushalt.
+              </p>
+              <div class="ctaRow">
+                <a class="btn choose" href="#buchung" data-pack="regular">REGELMÄßIG wählen</a>
+              </div>
+            </article>
+
+            <article class="glass card" role="listitem">
+              <h3>REGELMÄßIG – START INTENSIV</h3>
+              <p>
+                Einstieg in die regelmäßige Reinigung. Einmaliges INTENSIV als „Reset“, danach REGELMÄßIG.
+              </p>
+              <div class="ctaRow">
+                <a class="btn choose" href="#buchung" data-pack="regular_start_intensiv">START INTENSIV wählen</a>
+              </div>
+            </article>
+
+            <article class="glass card" role="listitem">
+              <h3>STIEGENHAUS</h3>
+              <p>
+                Für gemeinsame Bereiche in Mehrparteienhäusern. Stufen, Geländer, Laufwege und Kontaktflächen.
+                Umfang abhängig von Stockwerken und Zustand.
+              </p>
+              <div class="ctaRow">
+                <a class="btn choose" href="#buchung" data-pack="staircase">STIEGENHAUS wählen</a>
+              </div>
+            </article>
+
+            <article class="glass card" role="listitem">
+              <h3>SENIOR</h3>
+              <p>
+                BASIC-Inhalt mit schonender Ausführung. Ruhiges Tempo, erhöhte Aufmerksamkeit.
+                Priorität: Sicherheit und Sorgfalt.
+              </p>
+              <div class="ctaRow">
+                <a class="btn choose" href="#buchung" data-pack="senior">SENIOR wählen</a>
+              </div>
+            </article>
+
+            <article class="glass card" role="listitem">
+              <h3>HAUSTIERHAUSHALT (PET – Ausführung)</h3>
+              <p>
+                BASIC oder STANDARD für Haushalte mit Tierhaltung. Erhöhte Aufmerksamkeit auf Tierhaare und Hygiene.
+                Kein eigenes Paket, sondern spezielle Ausführung.
+              </p>
+              <div class="ctaRow">
+                <a class="btn choose" href="#buchung">PET-Ausführung (Info)</a>
+              </div>
+            </article>
+
+            <article class="glass card" role="listitem">
+              <h3>HAUSTIERHAUSHALT – ZUSATZ</h3>
+              <p>
+                Optionaler Zusatz bei Tierhaltung: extra Hygiene-Fokus, Puffer/Aufpreis möglich.
+                Keine Garantie für vollständige Entfernung alter, tief sitzender Tierhaare.
+              </p>
+              <div class="ctaRow">
+                <a class="btn choose" href="#buchung">PET-Zusatz (Info)</a>
+              </div>
+            </article>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <details class="glass card cnWarnDetails" style="margin-top:16px;">
+      <summary class="cnWarnSummary">
+        ⚠ Was ist nicht enthalten
+        <span class="cnWarnSub">Allgemein (für alle Pakete)</span>
+      </summary>
+  
+      <div class="cnWarnBody">
+    <strong>Allgemein (für alle Pakete)</strong>
+    <ul>
+      <li>Keine gewerblichen, industriellen oder betrieblichen Reinigungen (nur Privatkunden / B2C)</li>
+      <li>Keine Bau-, Bauendreinigungs- oder Sanierungsreinigung</li>
+      <li>Keine Entrümpelung, Haushaltsauflösung oder Müllabfuhr</li>
+      <li>Kein Tragen oder Verschieben schwerer Möbel oder Geräte</li>
+      <li>Keine Arbeiten mit spezieller Genehmigung, Ausbildung oder Gefährdungsbeurteilung</li>
+      <li>Keine Tätigkeiten mit erhöhtem Unfall- oder Gesundheitsrisiko</li>
+      <li>Keine Arbeiten außerhalb haushaltsüblicher Höhen (keine Leitern &gt; haushaltsüblich)</li>
+    </ul>
+
+    <strong>Böden &amp; Flächen</strong>
+    <ul>
+      <li>Keine Spezialbodenpflege (Schleifen, Polieren, Versiegeln)</li>
+      <li>Keine Entfernung dauerhafter Schäden (Kratzer, Verfärbungen, Brandflecken)</li>
+      <li>Keine Behandlung von Naturstein mit Spezialchemie</li>
+    </ul>
+
+    <strong>Küche</strong>
+    <ul>
+      <li>Keine Demontage von Geräten (Herd, Backofen, Dunstabzug, Kühlschrank)</li>
+      <li>Keine Reinigung hinter fest verbauten Geräten</li>
+      <li>Keine Reparatur- oder Wartungsarbeiten</li>
+    </ul>
+
+    <strong>Bad / WC</strong>
+    <ul>
+      <li>Keine Silikon-, Fugen- oder Dichtungsarbeiten</li>
+      <li>Keine Schimmelbeseitigung oder Behebung baulicher Mängel</li>
+      <li>Keine Rohr- oder Sanitärarbeiten</li>
+    </ul>
+
+    <strong>Fenster &amp; Außenbereiche</strong>
+    <ul>
+      <li>Keine Außenfenster in größerer Höhe</li>
+      <li>Keine Fassaden-, Balkon- oder Terrassenreinigung</li>
+      <li>Keine Arbeiten im Außenbereich bei Wetterrisiko</li>
+    </ul>
+
+    <strong>Intensiv / PET / Senior</strong>
+    <ul>
+      <li>Keine Garantie für vollständige Entfernung alter, tief sitzender Verschmutzungen</li>
+      <li>Kein medizinischer oder hygienischer Sonderdienst (z. B. Desinfektion nach Krankheit)</li>
+      <li>Kein Tierpflege- oder Tierentsorgungsservice</li>
+    </ul>
+
+    <strong>Zeit &amp; Umfang</strong>
+    <ul>
+      <li>Zeitangaben dienen ausschließlich der internen Einsatz- und Routenplanung</li>
+      <li>Zeit ist kein Vertragsbestandteil und begründet keinen Anspruch auf zusätzliche Leistungen</li>
+      <li>Der Fixpreis bezieht sich ausschließlich auf den beschriebenen Leistungsumfang</li>
+    </ul>
+
+    <strong>Rechtlicher Hinweis</strong>
+    <ul>
+      <li>
+        Die Leistungen werden nach wirtschaftlich vertretbarem Aufwand und
+        gemäß dem gebuchten Paket erbracht.
+      </li>
+      <li>
+        Eine Haftung für leichte Fahrlässigkeit ist – soweit gesetzlich zulässig –
+        ausgeschlossen. Für Schäden aus grober Fahrlässigkeit oder Vorsatz
+        wird uneingeschränkt gehaftet.
+      </li>
+      <li>
+        Keine Haftung besteht für bereits vorhandene Schäden,
+        Abnutzung oder altersbedingte Mängel, sofern diese nicht
+        schuldhaft verursacht wurden.
+      </li>
+      <li>
+        Zwingende gesetzliche Haftungsbestimmungen, insbesondere nach
+        ABGB und KSchG, bleiben unberührt.
+      </li>
+      <li>
+        Der konkrete Leistungsumfang ergibt sich ausschließlich aus dem
+        gebuchten Paket und der Terminbestätigung.
+      </li>
+    </ul>
+
+    <strong>Status</strong>
+    <ul>
+      <li>Termin = Anfrage</li>
+      <li>Verbindlich erst nach separater Bestätigung durch CleanNest HAUSSERVICE e.U.</li>
+    </ul>
+  </div>
+  
+    </details>
+
+  </div>
+</section>
+
+  <div class="cnFixNote" role="note" aria-label="Fixpreis Hinweis">
+  Fixpreis-Pakete – keine Stundenabrechnung. Der Termin gilt als Anfrage.
+  Verbindlich erst nach separater Bestätigung durch CleanNest HAUSSERVICE e.U.
+</div>
+
+<section id="preise" class="block">
+  <div class="wrap">
+    <h2 class="h2">Preise (Fixpreise)</h2>
+
+<button 
+  type="button" 
+  id="cnPriceToggle"
+  style="
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 18px;
+    margin:10px 0 0;
+    border:none;
+    border-radius:14px;
+    cursor:pointer;
+    font-weight:900;
+    font-size:16px;
+    background:linear-gradient(135deg,#f3d17a,#c49b46);
+    color:#111;
+    box-shadow:0 6px 18px rgba(243,209,122,.35);
+    transition:all .25s ease;
+  "
+  onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 10px 26px rgba(243,209,122,.55)'"
+  onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 6px 18px rgba(243,209,122,.35)'"
+  onmousedown="this.style.transform='scale(.98)'"
+  onmouseup="this.style.transform='translateY(-2px)'"
+>
+  <span>Preise anzeigen</span>
+  <span id="cnPriceToggleIcon" aria-hidden="true">+</span>
+</button>
+
+<div id="cnPricePanel" hidden>
+
+    <div class="glass card" style="padding:12px; margin:10px 0 14px; border:1px solid rgba(243,209,122,.35);">
+      <div style="font-weight:950; font-size:16px; color:var(--tx);">
+        🎯 –15% Startaktion bis 01.04.2026
+      </div>
+      <div style="margin-top:6px; font-weight:800; color:var(--dim); line-height:1.35;">
+        Rabatt wird automatisch beim Fixpreis berücksichtigt. Nicht gültig für Fensterreinigung &amp; Stiegenhaus.
+      </div>
+    </div>
+
+    <div class="glass card" style="padding:16px; margin:12px 0;">
+      <div style="font-weight:950; font-size:16px; color:var(--tx); margin-bottom:10px;">Wohnungsreinigung (S / M / L)</div>
+
+      <div style="overflow:auto; -webkit-overflow-scrolling:touch;">
+        <table style="width:100%; border-collapse:collapse; min-width:520px;">
+          <thead>
+            <tr>
+              <th style="text-align:left; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">Paket</th>
+              <th style="text-align:right; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">S</th>
+              <th style="text-align:right; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">M</th>
+              <th style="text-align:right; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">L</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:10px 8px;">BASIC</td>
+              <td style="padding:10px 8px; text-align:right;">
+                  <span class="old-price">163,64 €</span><br>
+                  <span class="new-price">139,09 €</span>
+                  </td>
+              
+              <td style="padding:10px 8px; text-align:right;">
+              <span class="old-price">327,26 €</span><br>
+              <span class="new-price">278,17 €</span>
+            <td>
+              
+              <td style="padding:10px; text-align:right;">
+                  <span class="old-price">490,89 €</span><br>
+                  <span class="new-price">417,26 €</span>
+              </td>
+             </tr>
+              
+             <tr>
+  <td style="padding:10px 8px;">STANDARD</td>
+
+  <td style="padding:10px 8px; text-align:right;">
+    <span class="old-price">218,18 €</span><br>
+    <span class="new-price">185,45 €</span>
+  </td>
+
+  <td style="padding:10px 8px; text-align:right;">
+    <span class="old-price">381,81 €</span><br>
+    <span class="new-price">324,54 €</span>
+  </td>
+
+  <td style="padding:10px 8px; text-align:right;">
+    <span class="old-price">545,43 €</span><br>
+    <span class="new-price">463,62 €</span>
+  </td>
+</tr>
+            
+            <tr>
+  <td style="padding:10px 8px;">INTENSIV</td>
+
+  <td style="padding:10px 8px; text-align:right;">
+    <span class="old-price">381,81 €</span><br>
+    <span class="new-price">324,54 €</span>
+  </td>
+
+  <td style="padding:10px 8px; text-align:right;">
+    <span class="old-price">599,99 €</span><br>
+    <span class="new-price">509,99 €</span>
+  </td>
+
+  <td style="padding:10px 8px; text-align:right;">
+    <span class="old-price">872,71 €</span><br>
+    <span class="new-price">741,80 €</span>
+  </td>
+</tr>
+              
+              <tr>
+  <td style="padding:10px 8px;">AUFFRISCHUNG</td>
+
+  <td style="padding:10px 8px; text-align:right;">
+    <span class="old-price">163,64 €</span><br>
+    <span class="new-price">139,09 €</span>
+  </td>
+
+  <td style="padding:10px 8px; text-align:right;">
+    <span class="old-price">272,72 €</span><br>
+    <span class="new-price">231,81 €</span>
+  </td>
+
+  <td style="padding:10px 8px; text-align:right;">
+    <span class="old-price">381,81 €</span><br>
+    <span class="new-price">324,54 €</span>
+  </td>
+</tr>
+            
+            <tr>
+  <td style="padding:10px 8px;">GELEGENHEITSREINIGUNG</td>
+
+  <td style="padding:10px 8px; text-align:right;">
+    <span class="old-price">191,76 €</span><br>
+    <span class="new-price">163 €</span>
+  </td>
+
+  <td style="padding:10px 8px; text-align:right;">
+    <span class="old-price">355,29 €</span><br>
+    <span class="new-price">302 €</span>
+  </td>
+
+  <td style="padding:10px 8px; text-align:right;">
+    <span class="old-price">518,82 €</span><br>
+    <span class="new-price">441 €</span>
+  </td>
+</tr>
+            
+          <tr>
+  <td style="padding:10px 8px;">SENIOR</td>
+
+  <td style="padding:10px 8px; text-align:right;">
+    <span class="old-price">148,24 €</span><br>
+    <span class="new-price">126 €</span>
+  </td>
+
+  <td style="padding:10px 8px; text-align:right;">
+    <span class="old-price">295,29 €</span><br>
+    <span class="new-price">251 €</span>
+  </td>
+
+  <td style="padding:10px 8px; text-align:right;">
+    <span class="old-price">436,47 €</span><br>
+    <span class="new-price">371 €</span>
+  </td>
+</tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top:12px; color:var(--dim); font-weight:800; line-height:1.4;">
+        Hinweis: Fixpreis-Pakete – keine Stundenabrechnung. Termin = Anfrage, verbindlich erst nach Bestätigung per E-Mail.
+      </div>
+    </div>
+
+    <div class="glass card" style="padding:16px; margin:12px 0;">
+      <div style="font-weight:950; font-size:16px; color:var(--tx); margin-bottom:10px;">PET (nur kombinierbar mit BASIC / STANDARD / INTENSIV)</div>
+      <div style="overflow:auto; -webkit-overflow-scrolling:touch;">
+        <table style="width:100%; border-collapse:collapse; min-width:520px;">
+          <thead>
+            <tr>
+              <th style="text-align:left; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">Paket + PET</th>
+              <th style="text-align:right; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">S</th>
+              <th style="text-align:right; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">M</th>
+              <th style="text-align:right; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">L</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:10px 8px;">BASIC + PET</td>
+              <td style="padding:10px 8px; text-align:right;">248 €</td>
+              <td style="padding:10px 8px; text-align:right;">352 €</td>
+              <td style="padding:10px 8px; text-align:right;">490 €</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 8px;">STANDARD + PET</td>
+              <td style="padding:10px 8px; text-align:right;">314 €</td>
+              <td style="padding:10px 8px; text-align:right;">413 €</td>
+              <td style="padding:10px 8px; text-align:right;">545 €</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 8px;">INTENSIV + PET</td>
+              <td style="padding:10px 8px; text-align:right;">380 €</td>
+              <td style="padding:10px 8px; text-align:right;">473 €</td>
+              <td style="padding:10px 8px; text-align:right;">600 €</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="glass card" style="padding:16px; margin:12px 0;">
+      <div style="font-weight:950; font-size:16px; color:var(--tx); margin-bottom:10px;">REGELMÄßIG (2×–6× pro Woche)</div>
+      <div style="overflow:auto; -webkit-overflow-scrolling:touch;">
+        <table style="width:100%; border-collapse:collapse; min-width:520px;">
+          <thead>
+            <tr>
+              <th style="text-align:left; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">Frequenz</th>
+              <th style="text-align:right; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">S</th>
+              <th style="text-align:right; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">M</th>
+              <th style="text-align:right; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">L</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:10px 8px;">2× / Woche</td>
+              <td style="padding:10px 8px; text-align:right;">175 €</td>
+              <td style="padding:10px 8px; text-align:right;">193 €</td>
+              <td style="padding:10px 8px; text-align:right;">255 €</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 8px;">3× / Woche</td>
+              <td style="padding:10px 8px; text-align:right;">175 €</td>
+              <td style="padding:10px 8px; text-align:right;">193 €</td>
+              <td style="padding:10px 8px; text-align:right;">255 €</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 8px;">4× / Woche</td>
+              <td style="padding:10px 8px; text-align:right;">175 €</td>
+              <td style="padding:10px 8px; text-align:right;">193 €</td>
+              <td style="padding:10px 8px; text-align:right;">255 €</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 8px;">5× / Woche</td>
+              <td style="padding:10px 8px; text-align:right;">175 €</td>
+              <td style="padding:10px 8px; text-align:right;">193 €</td>
+              <td style="padding:10px 8px; text-align:right;">255 €</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 8px;">6× / Woche</td>
+              <td style="padding:10px 8px; text-align:right;">175 €</td>
+              <td style="padding:10px 8px; text-align:right;">193 €</td>
+              <td style="padding:10px 8px; text-align:right;">255 €</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top:12px; color:var(--dim); font-weight:800; line-height:1.4;">
+        REGELMÄßIG – START INTENSIV: Variante A/B (S 225 € · M 293 € · L 370 €)
+      </div>
+    </div>
+
+    <div class="glass card" style="padding:16px; margin:12px 0;">
+      <div style="font-weight:950; font-size:16px; color:var(--tx); margin-bottom:10px;">STIEGENHAUS (pro Einsatz)</div>
+      <div style="overflow:auto; -webkit-overflow-scrolling:touch;">
+        <table style="width:100%; border-collapse:collapse;">
+          <thead>
+            <tr>
+              <th style="text-align:left; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">Etagen</th>
+              <th style="text-align:right; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">Fixpreis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding:10px 8px;">1</td><td style="padding:10px 8px; text-align:right;">105 €</td></tr>
+            <tr><td style="padding:10px 8px;">2</td><td style="padding:10px 8px; text-align:right;">155 €</td></tr>
+            <tr><td style="padding:10px 8px;">3</td><td style="padding:10px 8px; text-align:right;">205 €</td></tr>
+            <tr><td style="padding:10px 8px;">4</td><td style="padding:10px 8px; text-align:right;">255 €</td></tr>
+            <tr><td style="padding:10px 8px;">5</td><td style="padding:10px 8px; text-align:right;">305 €</td></tr>
+            <tr><td style="padding:10px 8px;">6</td><td style="padding:10px 8px; text-align:right;">355 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px; color:var(--dim); font-weight:800; line-height:1.4;">
+        Hinweis: Startaktion (–15%) gilt nicht für Stiegenhaus.
+      </div>
+    </div>
+
+    <div class="glass card" style="padding:16px; margin:12px 0;">
+      <div style="font-weight:950; font-size:16px; color:var(--tx); margin-bottom:10px;">FENSTERREINIGUNG</div>
+      <div style="color:var(--dim); font-weight:800; line-height:1.5;">
+        <div style="margin-bottom:10px;">
+          <strong>Light</strong>: Mindestpreis 120 € · bis 5 Fenster: 30 €/Fenster · bis 10: 25 €/Fenster · ab 11: 22 €/Fenster
+        </div>
+        <div>
+          <strong>Komplett</strong>: Mindestpreis 150 € · bis 5 Fenster: 40 €/Fenster · bis 10: 35 €/Fenster · ab 11: 30 €/Fenster
+        </div>
+        <div style="margin-top:12px;">
+          Hinweis: Startaktion (–15%) gilt nicht für Fensterreinigung.
+        </div>
+      </div>
+    </div>
+
+    <div class="glass card" style="padding:16px; margin:12px 0;">
+      <div style="font-weight:950; font-size:16px; color:var(--tx); margin-bottom:10px;">AIRBNB / TURNOVER (S / M / L)</div>
+
+      <div style="overflow:auto; -webkit-overflow-scrolling:touch;">
+        <table style="width:100%; border-collapse:collapse; min-width:520px;">
+          <thead>
+            <tr>
+              <th style="text-align:left; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">Variante</th>
+              <th style="text-align:right; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">S</th>
+              <th style="text-align:right; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">M</th>
+              <th style="text-align:right; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">L</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:10px 8px;">TURNOVER</td>
+              <td style="padding:10px 8px; text-align:right;">165 €</td>
+              <td style="padding:10px 8px; text-align:right;">210 €</td>
+              <td style="padding:10px 8px; text-align:right;">270 €</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 8px;">TURNOVER + PET</td>
+              <td style="padding:10px 8px; text-align:right;">190 €</td>
+              <td style="padding:10px 8px; text-align:right;">242 €</td>
+              <td style="padding:10px 8px; text-align:right;">311 €</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 8px;">TURNOVER + FENSTER</td>
+              <td style="padding:10px 8px; text-align:right;">195 €</td>
+              <td style="padding:10px 8px; text-align:right;">250 €</td>
+              <td style="padding:10px 8px; text-align:right;">320 €</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 8px;">TURNOVER + PET + FENSTER</td>
+              <td style="padding:10px 8px; text-align:right;">215 €</td>
+              <td style="padding:10px 8px; text-align:right;">275 €</td>
+              <td style="padding:10px 8px; text-align:right;">350 €</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 8px;">STARK VERSCHMUTZT</td>
+              <td style="padding:10px 8px; text-align:right;">215 €</td>
+              <td style="padding:10px 8px; text-align:right;">273 €</td>
+              <td style="padding:10px 8px; text-align:right;">351 €</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  </div>
+</section>
+
+ <section id="buchung" class="block">
+      <div class="wrap">
+        <h2 class="h2 bookingTitle">
+        Online buchen (Termin anfragen)
+       </h2>
+
+<div id="cnPromoNote" class="glass card" style="padding:12px; margin:10px 0 14px; border:1px solid rgba(243,209,122,.35);">
+  <div style="font-weight:950; font-size:16px; color:var(--tx);">
+    🎯 –15% Startaktion bis 01.04.2026
+  </div>
+  <div style="margin-top:6px; font-weight:800; color:var(--dim); line-height:1.35;">
+    Rabatt wird automatisch beim Fixpreis berücksichtigt. Nicht gültig für Fensterreinigung &amp; Stiegenhaus.
+  </div>
+</div>
+ 
+        <div class="glass card" style="padding:16px;">
+        <p style="margin:0 0 12px; line-height:1.6;">
+  <span style="display:block; font-size:20px; font-weight:950; color:var(--tx);">
+    Nur Privatkunden (B2C).
+  </span>
+
+  <span style="display:block; margin-top:8px; font-weight:800; color:var(--tx);">
+    ✅ Termin = Anfrage · verbindlich erst nach Bestätigung per E-Mail
+  </span>
+
+  <span style="display:block; margin-top:12px; font-weight:900; color:var(--tx);">
+    Buchungsablauf:
+  </span>
+
+  <span style="display:block; margin-top:6px; color:var(--dim);">
+  Wählen Sie Ihr gewünschtes Paket, geben Sie Ihre Kontaktdaten ein und fragen Sie einen freien Termin an.
+  Nach erfolgreicher Anfrage erhalten Sie umgehend eine Bestätigungs-E-Mail.
+  </span>
+</p>
+
+        <p style="margin:0 0 12px; color:var(--dim); line-height:1.55; font-weight:700;">
+         Ablauf: <span style="font-weight:900;">Paket wählen</span> → <span style="font-weight:900;">Wunschtermin anfragen</span> → <span style="font-weight:900;">Bestätigung per E-Mail</span>.
+         </p>
+         </div>
+        
+          <form id="cnBookingForm" autocomplete="on">
+            <section id="cnCtaGate" class="cn-cta-gate">
+            <button type="button" id="cnOpenBooking" class="cn-cta-primary">
+                Reinigungstermin anfragen
+      </button>  
+    </section>
+                <div id="cnPackOnly" hidden>
+                 <select class="field" id="cnPack" name="pack">
+                 <option value="">Bitte Paket wählen …</option>
+
+                 <option value="basic">BASIC</option>
+                 <option value="standard">STANDARD</option>
+                 <option value="intensiv">INTENSIV</option>
+                 <option value="refresh">AUFFRISCHUNG</option>
+
+                 <option value="regular">REGELMÄßIG</option>
+                 <option value="regular_start_intensiv">REGELMÄßIG – START INTENSIV</option>
+
+                 <option value="staircase">STIEGENHAUS</option>
+                 <option value="senior">SENIOR</option>
+
+                <option value="occasional">GELEGENHEITSREINIGUNG</option>
+
+                <option value="window_light">FENSTERREINIGUNG – Light</option>
+                <option value="window_full">FENSTERREINIGUNG – Komplett</option>
+              
+                <option value="airbnb">AIRBNB / TURNOVER REINIGUNG</option>
+              </select>
+            
+           <!-- EXTRA OPTIONS (only for certain packages) -->
+<div id="cnExtraOptions" style="margin-top:12px; display:grid; gap:10px;" hidden>
+
+  <!-- REGELMÄßIG -->
+  <label id="cnRegularFreqWrap" hidden>
+    <span style="font-size:12px; color:#2b3445; font-weight:900;">Frequenz (× pro Woche)</span>
+    <select class="field" id="cnRegularFreq" name="regular_frequency">
+      <option value="">Bitte wählen …</option>
+      <option value="2">2× pro Woche</option>
+      <option value="3">3× pro Woche</option>
+      <option value="4">4× pro Woche</option>
+      <option value="5">5× pro Woche</option>
+      <option value="6">6× pro Woche</option>
+    </select>
+  </label>
+
+  <!-- REGELMÄßIG – START INTENSIV (ohne Rabatt) -->
+  <label id="cnStartIntensivVariantWrap" hidden>
+    <span style="font-size:12px; color:#2b3445; font-weight:900;">Start-Variante</span>
+    <select class="field" id="cnStartIntensivVariant" name="start_intensiv_variant">
+      <option value="">Bitte wählen …</option>
+      <option value="A">Intensivstart</option>
+      <option value="B">Normalstart</option>
+    </select>
+  </label>
+       
+      <!-- STIEGENHAUS -->
+  <label id="cnStairLevelsWrap" hidden>
+    <span style="font-size:12px; color:#2b3445; font-weight:900;">Etagen / Stockwerke</span>
+    <select class="field" id="cnStairLevels" name="staircase_levels">
+      <option value="">Bitte wählen …</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+    </select>
+  </label>
+
+  <!-- FENSTERPUTZEN -->
+  <label id="cnWindowTierWrap" hidden>
+    <span style="font-size:12px; color:#2b3445; font-weight:900;">Anzahl Fenster</span>
+    <select class="field" id="cnWindowCount" name="window_count">
+      <option value="">Bitte wählen …</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+  </label>
+
+<div id="cnWindowInfo" class="cn-window-hinweis" hidden>
+
+  <strong>Preisstaffel – Light:</strong><br>
+  1–5 Fenster: 30 € / Fenster<br>
+  6–10 Fenster: 25 € / Fenster<br>
+  ab 11 Fenster: 22 € / Fenster<br>
+  <span class="cn-minimum">Mindestpreis: 120 €</span>
+
+  <br><br>
+
+  <strong>Preisstaffel – Komplett:</strong><br>
+  1–5 Fenster: 40 € / Fenster<br>
+  6–10 Fenster: 35 € / Fenster<br>
+  ab 11 Fenster: 30 € / Fenster<br>
+  <span class="cn-minimum">Mindestpreis: 150 €</span>
+
+</div>
+
+       
+       <!-- AIRBNB / TURNOVER – VARIANTE -->
+<label id="cnAirbnbVariantWrap" hidden>
+  <span style="font-size:12px; color:#2b3445; font-weight:900;">AIRBNB / Turnover – Variante</span>
+  <select class="field" id="cnAirbnbVariant" name="airbnb_variant">
+    <option value="">Bitte wählen …</option>
+    <option value="turnover">TURNOVER REINIGUNG</option>
+    <option value="pet">TURNOVER + PET</option>
+    <option value="window">TURNOVER + FENSTERREINIGUNG</option>
+    <option value="pet_window">TURNOVER + PET + FENSTERREINIGUNG</option>
+    <option value="heavy">STARK VERSCHMUTZTE TURNOVER REINIGUNG</option>
+  </select>
+</label>
+
+</div>
+  </div>                
+                  <div id="cnSizeWrap" style="margin-top:12px;" hidden>
+                 <div style="font-size:12px; color:var(--muted); font-weight:900; margin-bottom:8px;">
+                  Wohnungsgröße
+                  </div>
+
+                <div id="cnSizeCards" style="display:grid; grid-template-columns:1fr; gap:10px;">
+                <button type="button" class="btn" data-size="S" data-sqm="0-50">S · 0–50 m²</button>
+               <button type="button" class="btn" data-size="M" data-sqm="51-100">M · 51–100 m²</button>
+                <button type="button" class="btn" data-size="L" data-sqm="101-200">L · 101–200 m²</button>
+            <button type="button" class="btn" data-size="CUSTOM" data-sqm="201+">Individuelles Angebot · 201+   m²</button>
+               </div>
+                 <div id="cnPriceHint" class="note" style="margin-top:10px;">
+                 Fixpreis: — (bitte Paket und Größe wählen)
+               </div>
+
+                   <input type="hidden" id="cnSize" name="size" value="">
+                   <input type="hidden" id="cnSqmClass" name="sqm_class" value="">
+                   </div>
+              
+                  <section id="cnFormRest" hidden>
+                   <div class="formGrid">
+             
+             <div class="checkRow" id="cnPetWrap">
+<div style="margin-top:12px; padding:12px; border:1px solid rgba(255,255,255,.15); border-radius:12px; background:rgba(255,255,255,.04)">
+                 
+                 <div style="font-weight:900; margin-bottom:6px;">
+                  ZUSATZOPTION: HAUSTIER-REINIGUNG
+             </div>
+             
+<label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
+<input id="cnPet" name="pet" type="checkbox" value="1" style="margin-top:3px;" />
+                <span style="display:block; white-space:normal; line-height:1.35; text-align:left;">
+                    Haben Sie Haustiere? (Hund, Katze, etc.)
+                    AUFSCHLAG: +10% auf den Grundpreise des gewählten Pakets.
+                    Hinweis: Gilt für alle Wohnungsreinigungs-Pakete.
+                    Nicht für Stiegehause und Fensterreinigung.
+                </span>
+                </label>              
+              </div>
+              </div>
+              
+             
+           <div class="cnField cnFixpriceField">
+  <label class="cnLabel" for="cnFixedPriceEur">Fixpreis (EUR)</label>
+  <input
+    id="cnFixedPriceEur"
+    name="fixed_price_eur"
+    type="text"
+    inputmode="numeric"
+    readonly
+    value="—"
+    aria-readonly="true"
+  />
+  <div class="cnFixpriceHint">Wird automatisch aus Paket + Wohnungsgröße gesetzt.</div>
+</div>   
+              
+         <label>
+  <span style="font-size:12px; color:var(--muted); font-weight:900;">Vorname</span>
+  <input
+    class="field"
+    id="cnFirstName"
+    name="first_name"
+    autocomplete="given-name"
+    required
+  />
+</label>
+
+<label>
+  <span style="font-size:12px; color:var(--muted); font-weight:900;">Nachname</span>
+  <input
+    class="field"
+    id="cnLastName"
+    name="last_name"
+    autocomplete="family-name"
+    required
+  />
+</label>
+
+  <label>
+  <span style="font-size:12px; color:var(--muted); font-weight:900;">E-Mail-Adresse</span>
+  <input
+    class="field"
+    id="cnEmail"
+    name="email"
+    type="email"
+    autocomplete="email"
+    required
+  />
+</label>
+
+<label>
+  <span style="font-size:12px; color:var(--muted); font-weight:900;">Telefon</span>
+  <div style="display:flex; gap:10px; align-items:center;">
+    <div
+      class="field"
+      style="width:92px; text-align:center; font-weight:900; color:var(--tx); opacity:.95; pointer-events:none; user-select:none;"
+    >
+      +43
+    </div>
+    <input
+      class="field"
+      id="cnPhone"
+      name="phone_local"
+      inputmode="numeric"
+      autocomplete="tel-national"
+      placeholder="6706513480"
+      required
+    />
+  </div>
+  <div class="note" style="margin-top:6px;">
+    Bitte ohne +43 eingeben (nur Ziffern), z.B. 6780000000
+  </div>
+</label>
+
+<label>
+  <span style="font-size:12px; color:var(--muted); font-weight:900;">Straße &amp; Hausnummer</span>
+  <input
+    class="field"
+    id="cnStreet"
+    name="street"
+    autocomplete="street-address"
+    required
+  />
+</label>
+
+<label>
+  <span style="font-size:12px; color:var(--muted); font-weight:900;">PLZ</span>
+  <input
+    class="field"
+    id="cnZip"
+    name="zip"
+    inputmode="numeric"
+    autocomplete="postal-code"
+    required
+  />
+</label>
+
+<label>
+  <span style="font-size:12px; color:var(--muted); font-weight:900;">Ort</span>
+  <input
+    class="field"
+    id="cnCity"
+    name="city"
+    autocomplete="address-level2"
+    required
+  />
+</label>
+
+              <!-- 14 Tage (FAGG) – Info (aufklappbar) + Pflicht-Lesen + Ja/Nein + Timestamp -->
+      <div class="cn-consent14d" id="cnConsent14dBlock">
+      <details class="cn-consent14d__details">
+      <summary class="cn-consent14d__summary">
+      Ausdrückliches Verlangen bei kurzfristigen Terminen (innerhalb 14 Tage) – Details öffnen
+    </summary>
+
+    <div class="cn-consent14d__box">
+      <div class="cn-consent14d__text">
+        Wenn Sie einen Termin innerhalb der nächsten 14 Tage wünschen, benötigen wir Ihr ausdrückliches Verlangen,
+        dass wir mit der Dienstleistung vor Ablauf der gesetzlichen Widerrufsfrist beginnen.
+        Ohne dieses ausdrückliche Verlangen kommt keine verbindliche Buchung zustande.
+        <div style="margin-top:10px;">
+          <a href="/widerruf-14tage.html" target="_blank" rel="noopener">
+            Gesetzliche Details lesen (FAGG – 14 Tage)
+          </a>
+        </div>
+      </div>
+
+      <label class="cn-consent14d__choice" style="margin-top:10px;">
+        <input id="cnConsent14dRead" type="checkbox">
+        <span>Ich habe die Informationen gelesen und verstanden.</span>
+      </label>
+
+      <div class="cn-consent14d__choices" role="group" aria-label="Ausdrückliches Verlangen innerhalb 14 Tage">
+        <label class="cn-consent14d__choice">
+          <input id="cnConsent14dYes" type="radio" name="consent_14d_choice" value="yes">
+          <span>Ja, ich verlange ausdrücklich die Ausführung der Dienstleistung vor Ablauf der 14-tägigen Widerrufsfrist.</span>
+        </label>
+
+        <label class="cn-consent14d__choice">
+          <input id="cnConsent14dNo" type="radio" name="consent_14d_choice" value="no">
+          <span>Nein</span>
+        </label>
+      </div>
+
+          <label class="cn-consent14d__choice" style="margin-top:10px;">
+          <input id="cnConsent14dLoss" type="checkbox">
+           <span>Ich nehme zur Kenntnis, dass ich mein Widerrufsrecht verliere, sobald die Dienstleistung           vollständig erbracht wurde.</span>
+            </label>
+
+           <input id="consent_14d_loss_at" name="consent_14d_loss_at" type="hidden" value="">
+    
+      <!-- Hidden: kompatibilis marad a jelenlegi feldolgozással -->
+      <input id="consent_14d" name="consent_14d" type="checkbox" value="1" hidden>
+      <input id="consent_14d_at" name="consent_14d_at" type="hidden" value="">
+      <input id="consent_14d_read_at" name="consent_14d_read_at" type="hidden" value="">
+    </div>
+  </details>
+</div>
+           
+               <label>
+                <span style="font-size:12px; color:var(--muted); font-weight:900;">Wunschtermin (Datum)</span>
+                <input class="field" id="cnDate" name="date" type="date" required autocomplete="off"/>
+              </label>
+
+              <div id="cnSchedulerHost"></div>
+              <input type="hidden" id="cnStart" name="start" />
+
+              <label>
+                <span style="font-size:12px; color:var(--muted); font-weight:900;">Hinweis (optional)</span>
+                <textarea class="field" id="cnNote" name="note" rows="3"></textarea>
+              </label>
+
+               <div class="checkRow">
+                <input id="cnB2C" type="checkbox" required />
+                <div>
+                  Ich bestätige, dass ich als <strong>Privatkunde</strong> anfrage (B2C). Gewerbliche/industrielle Anfragen werden nicht angenommen.
+                </div>
+              </div>
+
+              <div class="checkRow">
+                <input id="cnLegal" type="checkbox" required />
+                <div>
+                  Ich akzeptiere die <a href="/agb.html">AGB</a> und die <a href="/datenschutz.html">Datenschutzhinweise</a>.
+                </div>
+              </div>
+
+              <div class="ctaRow">
+                <button class="btn primary" id="cnSubmit" type="submit">Termin anfragen</button>
+                <button class="btn" id="cnAiSuggest" type="button">AI Vorschlag (2 Optionen)</button>
+              </div>
+
+              <p class="note" style="margin:0;">
+                Online-Zahlung nur nach bestätigtem Termin und nur durch Ihre aktive Auswahl (keine automatische Abbuchung).
+              </p>
+            </div>
+           </section>
+           </form>
+        </div>
+    </section>
+
+    <section id="kontakt" class="block">
+      <div class="wrap">
+        <h2 class="h2">Kontakt</h2>
+        <div class="glass card" style="padding:16px;">
+          <p style="margin:0; color:var(--dim); line-height:1.55;">
+            Telefon: <a href="tel:+436706513480">+43 670 651 3480</a><br/>
+            E-Mail: <a href="mailto:office@cleannest.at">office@cleannest.at</a><br/>
+            Einsatzgebiet: Niederösterreich &amp; Wien<br/>
+            <strong>Ausschließlich für Privatkunden (B2C).</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    </main>
+    
+  <footer>
+  <div class="wrap">
+    <div class="footGrid">
+      <div>
+        <div style="font-weight:900;">CleanNest HAUSSERVICE e.U.</div>
+        <div class="note" style="margin-top:6px;">
+          CleanNest – für leichtere Tage und ein sauberes Zuhause<br/>
+          Haus- und Wohnungsreinigung ausschließlich für Privatkunden (B2C) in Österreich.
+        </div>
+      </div>
+
+      <div class="legalLinks" aria-label="Rechtliches">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="/agb.html">AGB</a>
+        <a href="/widerruf.html">Widerruf</a>
+        <a href="/cookies.html">Cookie-Einstellungen</a>
+      </div>
+
+      <div class="footerCounter">
+        <div class="footerCounterInner">
+          <span class="fcIcon">👀</span>
+          <span class="fcLabel">Besucher gesamt</span>
+          <span class="fcNumber" id="cnCounter">—</span>
+        </div>
+      </div>
+
+      <div class="footerCounter" id="cnCampWrap" hidden>
+        <div class="footerCounterInner">
+          <span class="fcIcon">📣</span>
+          <span class="fcLabel">Kampagne</span>
+          <span class="fcNumber" id="cnCampCounter">—</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="cnChatHost"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="/js/scheduler.js" defer></script>
+<script src="/js/ui.js" defer></script>
+<script src="/js/form-submit.js" defer></script>
+
+<script src="/js/cn-site-knowledge.js"></script>
+<script src="/js/cn-assistant.js" defer></script>
+
+<script>
+ 
+  // --- ELEMEK BEAZONOSÍTÁSA ---
+  document.addEventListener("DOMContentLoaded", function() {
+  
+  var openBtn = document.getElementById("cnOpenBooking"); // Sárga gomb
+  var gateBlock = document.getElementById("cnCtaGate");   // A sárga gomb doboza
+  var sizeWrap = document.getElementById("cnSizeWrap");   // Méretválasztó (S, M, L)
+  var formRest = document.getElementById("cnFormRest");   // Név, Cím, Telefon (EZT KERESED)
+  
+  var sizeBtns = document.querySelectorAll('#cnSizeCards .btn'); // A méret gombok
+  var sizeInput = document.getElementById("cnSize");      // Rejtett input
+  var sqmInput = document.getElementById("cnSqmClass");   // Rejtett input
+
+  // --- 1. LÉPÉS: "Termin anfragen" gomb megnyomása ---
+  if (openBtn) {
+    openBtn.addEventListener("click", function() {
+      // Eltüntetjük a sárga gombot
+      if(gateBlock){ gateBlock.hidden = true; gateBlock.style.display = ""; }
+     
+      var packOnly = document.getElementById("cnPackOnly");
+      if (packOnly) packOnly.hidden = false;
+      
+      if (window.__CN_UPDATE_REST_GATE) window.__CN_UPDATE_REST_GATE();
+    });
+  }
+
+  // --- 2. LÉPÉS: Méret kiválasztása (S, M, L) -> EZ HOZZA ELŐ A NEVET ---
+  if (sizeBtns.length > 0) {
+    sizeBtns.forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        
+        // A. Gombok színezése (vizuális visszajelzés)
+        sizeBtns.forEach(function(b){ b.classList.remove("primary"); });
+        this.classList.add("primary");
+
+        // B. Értékek mentése a háttérben
+        var valSize = this.getAttribute("data-size");
+        var valSqm = this.getAttribute("data-sqm");
+        if(sizeInput) sizeInput.value = valSize;
+        if(sqmInput) sqmInput.value = valSqm;
+        if (window.__CN_UPDATE_REST_GATE) window.__CN_UPDATE_REST_GATE();
+        });
+    });
+  }
+});
+
+
+</script>
+
+<script>
+(function(){
+  var btn = document.getElementById("cnOpenBooking");
+  var gate = document.getElementById("cnCtaGate");
+  var packOnly = document.getElementById("cnPackOnly");
+  var rest = document.getElementById("cnFormRest");
+  var pack = document.getElementById("cnPack");
+
+  var sizeWrap = document.getElementById("cnSizeWrap");
+  var sizeCards = document.getElementById("cnSizeCards");
+  var sizeInp = document.getElementById("cnSize");
+  var sqmInp = document.getElementById("cnSqmClass");
+  var cnDate = document.getElementById("cnDate");
+  var cnConsentBlock = document.getElementById("cnConsent14dBlock");
+  var cnConsentRead = document.getElementById("cnConsent14dRead");
+  var cnConsentYes = document.getElementById("cnConsent14dYes");
+  var cnConsentNo = document.getElementById("cnConsent14dNo");
+  var cnConsentLoss = document.getElementById("cnConsent14dLoss");
+
+  function _cnISO(){
+  try { return new Date().toISOString(); } catch(e){ return ""; }
+}
+
+function _cnSetHidden(id, v){
+  var el = document.getElementById(id);
+  if(el) el.value = String(v || "");
+}
+
+function _cnSetChecked(id, v){
+  var el = document.getElementById(id);
+  if(el) el.checked = !!v;
+}
+
+function _cnDayDiffFromToday(selectedDateStr){
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var selected = new Date(selectedDateStr + "T00:00:00");
+  return Math.round((selected - today) / 86400000);
+}
+
+function _cnResetConsentUI(){
+  if(cnConsentRead) cnConsentRead.checked = false;
+  if(cnConsentYes)  cnConsentYes.checked  = false;
+  if(cnConsentNo)   cnConsentNo.checked   = false;
+  if(cnConsentLoss) cnConsentLoss.checked = false;
+
+  _cnSetChecked("consent_14d", false);
+  _cnSetHidden("consent_14d_at", "");
+  _cnSetHidden("consent_14d_read_at", "");
+  _cnSetHidden("consent_14d_loss_at", "");
+
+  // extra hardening (ha valahol value-t olvasnának)
+  var c = document.getElementById("consent_14d");
+  if(c) c.value = "";
+}
+
+function _cnSyncConsentHidden(){
+  var within14 = false;
+
+  if (cnDate && cnDate.value) {
+    var d = _cnDayDiffFromToday(cnDate.value);
+    within14 = (d >= 0 && d <= 14);
+  }
+
+  // Ha nem 14 napon belül → teljes reset
+  if (!within14) {
+    _cnResetConsentUI();
+    return;
+  }
+
+  var readOk = !!(cnConsentRead && cnConsentRead.checked);
+  var yesOk  = !!(cnConsentYes  && cnConsentYes.checked);
+  var noOk   = !!(cnConsentNo   && cnConsentNo.checked);
+  var lossOk = !!(cnConsentLoss && cnConsentLoss.checked);
+
+  // NO kizárja a YES-t (hard invalid)
+  if (noOk) {
+    yesOk = false;
+  }
+
+  // Hidden fő checkbox csak akkor igaz, ha minden kötelező feltétel teljesül
+  var consentValid = (readOk && yesOk && lossOk);
+  _cnSetChecked("consent_14d", consentValid);
+
+  // determinisztikus timestamp-kezelés
+  if (!readOk) _cnSetHidden("consent_14d_read_at", "");
+  if (!yesOk)  _cnSetHidden("consent_14d_at", "");
+  if (!lossOk) _cnSetHidden("consent_14d_loss_at", "");
+
+  // READ timestamp (first-set only)
+  if (readOk) {
+    var readAt = document.getElementById("consent_14d_read_at");
+    if (readAt && !String(readAt.value || "").trim()) {
+      _cnSetHidden("consent_14d_read_at", _cnISO());
+    }
+  }
+
+  // YES timestamp (first-set only)
+  if (yesOk) {
+    var yesAt = document.getElementById("consent_14d_at");
+    if (yesAt && !String(yesAt.value || "").trim()) {
+      _cnSetHidden("consent_14d_at", _cnISO());
+    }
+  }
+
+  // LOSS timestamp (first-set only)
+  if (lossOk) {
+    var lossAt = document.getElementById("consent_14d_loss_at");
+    if (lossAt && !String(lossAt.value || "").trim()) {
+      _cnSetHidden("consent_14d_loss_at", _cnISO());
+    }
+  }
+}
+
+function updateConsentBlock(){
+  if(!cnConsentBlock) return;
+
+  var within14 = false;
+  if (cnDate && cnDate.value) {
+    var d = _cnDayDiffFromToday(cnDate.value);
+    within14 = (d >= 0 && d <= 14);
+  }
+
+  cnConsentBlock.style.display = within14 ? "block" : "none";
+
+  if (!within14) {
+    _cnResetConsentUI();
+  } else {
+    _cnSyncConsentHidden();
+  }
+}
+
+if (cnDate) cnDate.addEventListener("change", updateConsentBlock);
+if (cnConsentRead) cnConsentRead.addEventListener("change", _cnSyncConsentHidden);
+if (cnConsentYes)  cnConsentYes.addEventListener("change", _cnSyncConsentHidden);
+if (cnConsentNo)   cnConsentNo.addEventListener("change", _cnSyncConsentHidden);
+if (cnConsentLoss) cnConsentLoss.addEventListener("change", _cnSyncConsentHidden);
+
+window.__CN_UPDATE_CONSENT_BLOCK = updateConsentBlock;
+
+
+window.__CN_BOOKING_CLOSE = function(){
+  try{
+    if(gate) gate.hidden = false;
+    if(packOnly) packOnly.hidden = true;
+    if(rest) rest.hidden = true;
+
+    if(pack) pack.value = "";
+    if(sizeWrap) sizeWrap.hidden = true;
+    resetSize();
+    updateRestGate();
+
+    // bezáráskor mindig tiszta állapot (determinista)
+    _cnResetConsentUI();
+    if(cnConsentBlock) cnConsentBlock.style.display = "none";
+  }catch(e){}
+};
+
+function resetSize(){
+  if(sizeInp) sizeInp.value = "";
+  if(sqmInp) sqmInp.value = "";
+  if(sizeCards){
+    var bs = sizeCards.querySelectorAll("button[data-size]");
+    for(var i=0;i<bs.length;i++) bs[i].classList.remove("primary");
+  }
+}
+
+function updateRestGate(){
+  var p = pack && String(pack.value||"").trim();
+  var hasPack = !!p;
+
+  var needsSize = !(p === "staircase" || p === "window_light" || p === "window_full");
+
+ if(sizeWrap){
+  sizeWrap.hidden = !hasPack;
+}
+
+if(sizeCards){
+  sizeCards.hidden = !needsSize;
+}
+
+if(!needsSize){
+  if(sizeInp) sizeInp.value = "";
+  if(sqmInp) sqmInp.value = "";
+  if(sizeCards){
+    var bs = sizeCards.querySelectorAll("button[data-size]");
+    for(var i=0;i<bs.length;i++) bs[i].classList.remove("primary");
+  }
+}
+
+var hasSize = needsSize ? (sizeInp && String(sizeInp.value||"").trim()) : true;
+
+var extraOk = true;
+
+var winCountEl = document.getElementById("cnWindowCount");
+var stairsEl   = document.getElementById("cnStairLevels");
+var freqEl     = document.getElementById("cnRegularFreq");
+var startEl    = document.getElementById("cnStartIntensivVariant");
+var airEl      = document.getElementById("cnAirbnbVariant");
+
+if(p === "window_light" || p === "window_full"){
+  extraOk = !!(winCountEl && String(winCountEl.value || "").trim());
+}
+if(p === "staircase"){
+  extraOk = !!(stairsEl && String(stairsEl.value || "").trim());
+}
+if(p === "regular"){
+  extraOk = !!(freqEl && String(freqEl.value || "").trim());
+}
+if(p === "regular_start_intensiv"){
+  extraOk = !!(startEl && String(startEl.value || "").trim());
+}
+if(p === "airbnb"){
+  extraOk = !!(airEl && String(airEl.value || "").trim());
+}
+
+if(rest) rest.hidden = !(hasPack && hasSize && extraOk);
+}
+
+window.__CN_UPDATE_REST_GATE = updateRestGate;
+updateRestGate();
+
+ 
+function updateExtraOptions(){
+  var packEl = document.getElementById("cnPack");
+  var extra  = document.getElementById("cnExtraOptions");
+
+  var wFreq  = document.getElementById("cnRegularFreqWrap");
+  var wStart = document.getElementById("cnStartIntensivVariantWrap");
+  var wStairs = document.getElementById("cnStairLevelsWrap");
+  var wWin   = document.getElementById("cnWindowTierWrap");
+  var wAir  = document.getElementById("cnAirbnbVariantWrap");
+  var winInfo = document.getElementById("cnWindowInfo");
+  
+  var fFreq  = document.getElementById("cnRegularFreq");
+  var fStart = document.getElementById("cnStartIntensivVariant");
+  var fStairs = document.getElementById("cnStairLevels");
+  var fWin   = document.getElementById("cnWindowCount");
+  var fAir  = document.getElementById("cnAirbnbVariant");
+  
+  
+  function clearField(el){
+    if(!el) return;
+    el.value = "";
+    if (el.tagName === "SELECT") el.selectedIndex = 0;
+  }
+
+  function hideAll(){
+    if(extra) extra.hidden = true;
+
+    if(wFreq)  wFreq.hidden = true;
+    if(wStart) wStart.hidden = true;
+    if(wStairs) wStairs.hidden = true;
+    if(wWin)   wWin.hidden = true;
+
+    if(wAir) wAir.hidden = true;
+    if(fAir) fAir.value = "";
+    if(winInfo) winInfo.hidden = true;
+     
+    clearField(fFreq);
+    clearField(fStart);
+    clearField(fStairs);
+    clearField(fWin);
+   clearField(fAir);
+  }
+
+  hideAll();
+
+  var p = packEl ? String(packEl.value || "").trim() : "";
+  if(!p) return;
+
+  function showOnly(wrapper){
+    if(extra) extra.hidden = false;
+    if(wrapper) wrapper.hidden = false;
+  }
+
+  if(p === "regular"){ showOnly(wFreq); return; }
+  if(p === "regular_start_intensiv"){ showOnly(wStart); return; }
+  if(p === "staircase"){ showOnly(wStairs); return; }
+  if(p === "window_light" || p === "window_full"){ 
+   showOnly(wWin);
+   if(winInfo) winInfo.hidden = false;
+   return;
+  }
+   
+  if(p === "airbnb"){
+  if(extra) extra.hidden = false;
+  if(wAir) wAir.hidden = false;
+   return;
+ }
+}
+document.addEventListener("DOMContentLoaded", function(){
+  var packEl = document.getElementById("cnPack");
+  if(!packEl) return;
+
+function getSelectedPack(){
+    return (packEl && packEl.value)
+    ? String(packEl.value).trim()
+    : "";
+}
+
+  function _toggleSizeByPack(){
+    var pack = getSelectedPack();
+
+    var sizeCards = document.getElementById("cnSizeCards");
+    var sizeEl    = document.getElementById("cnSize");
+    var sqmEl     = document.getElementById("cnSqmClass");
+
+    // size NEM kell: Stiegenhaus + Fenster
+    var needsSize = !(pack === "staircase" || pack === "window_light" || pack === "window_full");
+
+    if(sizeCards) sizeCards.hidden = !needsSize;
+
+    if(!needsSize){
+      if(sizeEl) sizeEl.value = "";
+      if(sqmEl)  sqmEl.value  = "";
+      if(sizeCards){
+        var bs = sizeCards.querySelectorAll("button[data-size]");
+        for(var i=0;i<bs.length;i++) bs[i].classList.remove("primary");
+      }
+    }
+  }
+
+  function _bindExtraOptionPriceRefresh(){
+    var ids = [
+      "cnRegularFreq",
+      "cnStartIntensivVariant",
+      "cnStairLevels",
+      "cnWindowCount",
+      "cnAirbnbVariant"
+    ];
+    for(var i=0;i<ids.length;i++){
+      var el = document.getElementById(ids[i]);
+      if(!el) continue;
+      el.addEventListener("change", function(){
+         if (window.__CN_UPDATE_PRICE__HINT) window.__CN_UPDATE_PRICE_HINT();
+        if (window.__CN_UPDATE_REST_GATE) window.__CN_UPDATE_REST_GATE();
+      });
+      el.addEventListener("input", function(){
+          if (window.__CN_UPDATE_PRICE_HINT) window.__CN_UPDATE_PRICE_HINT();
+         if (window.__CN_UPDATE_REST_GATE) window.__CN_UPDATE_REST_GATE();
+      });
+    }
+  }
+
+  function _onPackChange(){
+    updateExtraOptions();
+    _toggleSizeByPack();
+     if (window.__CN_UPDATE_REST_GATE) window.__CN_UPDATE_REST_GATE();
+     if (window.__CN_MAYBE_ASK_PET) window.__CN_MAYBE_ASK_PET();
+     if (window.__CN_UPDATE_PRICE_HINT) window.__CN_UPDATE_PRICE_HINT();
+  }
+
+  packEl.addEventListener("change", _onPackChange);
+  packEl.addEventListener("input", _onPackChange);
+
+  _bindExtraOptionPriceRefresh();
+  _onPackChange();
+});
+
+ 
+(function(){
+  var el = document.querySelector('.heroMark');
+  if(!el) return;
+
+  var img = el.querySelector('.heroBanner');
+  var raf = 0;
+  var tx = 0, ty = 0;
+  var mx = 0, my = 0;
+
+  function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+
+  function apply(){
+    raf = 0;
+
+    // -1..1 tartomány
+    var nx = clamp(mx, -1, 1);
+    var ny = clamp(my, -1, 1);
+
+    // 3D dőlés (kicsi, prémium)
+    var rotY = nx * 10;     // fok
+    var rotX = ny * -8;     // fok
+
+    // micro-eltolás
+    tx = nx * 6;            // px
+    ty = ny * 5;            // px
+
+    el.style.transform =
+      'translateX(-50%) translate3d(' + tx.toFixed(2) + 'px,' + ty.toFixed(2) + 'px,0px) rotateY(' + rotY.toFixed(2) + 'deg) rotateX(' + rotX.toFixed(2) + 'deg)';
+
+    if(img){
+      img.style.transform =
+        'translateZ(28px) scale(1.05) translate3d(' + (-tx*0.35).toFixed(2) + 'px,' + (-ty*0.35).toFixed(2) + 'px,0px)';
+    }
+  }
+
+  function requestApply(){
+    if(raf) return;
+    raf = requestAnimationFrame(apply);
+  }
+
+  // desktop / laptop: egér alapján
+  window.addEventListener('mousemove', function(e){
+    var w = window.innerWidth || 1;
+    var h = window.innerHeight || 1;
+    var x = (e.clientX / w) * 2 - 1;
+    var y = (e.clientY / h) * 2 - 1;
+    mx = x;
+    my = y;
+    requestApply();
+  }, {passive:true});
+
+  // mobil: scroll-parallax (biztos, nem engedélyköteles)
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY || 0;
+    // enyhe "lélegzés" görgetésre
+    my = clamp((y / 600) - 0.15, -0.35, 0.35);
+    requestApply();
+  }, {passive:true});
+
+  // ha elhagyod az ablakot, vissza középre
+  window.addEventListener('mouseleave', function(){
+    mx = 0; my = 0;
+    requestApply();
+  }, {passive:true});
+
+  // init
+  mx = 0; my = 0;
+  apply();
+})();
+   
+   (function(){
+  "use strict";
+
+  function $(id){ return document.getElementById(id); }
+
+  var root  = $("cnPakRoot");
+  var tog   = $("cnPakToggle");
+  var panel = $("cnPakPanel");
+  if(!root || !tog || !panel) return;
+
+  var open = false;
+
+  function setOpen(v){
+    open = !!v;
+    root.setAttribute("data-open", open ? "1" : "0");
+    tog.setAttribute("aria-expanded", open ? "true" : "false");
+    panel.setAttribute("aria-hidden", open ? "false" : "true");
+    panel.style.maxHeight = open ? (panel.scrollHeight + "px") : "0px";
+  }
+
+  // ALAPHELYZET: CSUKOTT
+  setOpen(false);
+
+  // KATTINTÁSRA: NYIT/ZÁR
+  tog.addEventListener("click", function(){
+    setOpen(!open);
+  }, { passive:true });
+
+  // RESIZE: ha nyitva, maxHeight frissítés
+  window.addEventListener("resize", function(){
+    if(open) panel.style.maxHeight = panel.scrollHeight + "px";
+  }, { passive:true });
+
+  function dispatchChange(el){
+    try{ el.dispatchEvent(new Event("change",{bubbles:true})); }
+    catch(e){
+      var ev = document.createEvent("Event");
+      ev.initEvent("change", true, true);
+      el.dispatchEvent(ev);
+    }
+  }
+
+  var packSelect = $("cnPack");
+  var openBookingBtn = $("cnOpenBooking");
+
+  // CSOMAG VÁLASZTÁS:
+  // 1) cnPack kitölt
+  // 2) foglalás megnyit (a meglévő gomb click-jével)
+  // 3) Pakete panel csuk
+  var btns = document.querySelectorAll('#pakete a[data-pack]');
+  for(var i=0;i<btns.length;i++){
+    btns[i].addEventListener("click", function(e){
+      e.preventDefault();
+
+      var v = this.getAttribute("data-pack") || "";
+      if(packSelect){
+        packSelect.value = v;
+        dispatchChange(packSelect);
+      }
+
+      if(openBookingBtn) openBookingBtn.click();
+
+      var target = $("buchung");
+      if(target && target.scrollIntoView){
+        target.scrollIntoView({behavior:"smooth", block:"start"});
+      }else{
+        location.hash = "#buchung";
+      }
+
+      setOpen(false);
+     }, { passive:false });
+  }
+})();
+})();
+</script>
+
+<div id="cnFxOverlay"></div>
+<div id="cnFxSpark"></div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+  try{
+    if (window.CN_SCHED && typeof window.CN_SCHED.mount === "function") {
+      if (document.getElementById("cnSchedulerHost")) {
+        window.CN_SCHED.mount("cnSchedulerHost");
+      }
+    }
+  }catch(e){}
+});
+
+</script>
+
+<script>
+(() => {
+  function getCampaignKey() {
+    try {
+      const u = new URL(window.location.href);
+      const v = u.searchParams.get('kampagne');
+      if (!v) return '';
+      return String(v);
+    } catch (e) {
+      return '';
+    }
+  }
+
+  (async () => {
+    try {
+      const camp = getCampaignKey();
+      const url = camp
+        ? ('/counter/count.php?kampagne=' + encodeURIComponent(camp))
+        : '/counter/count.php';
+
+      const response = await fetch(url, { cache: 'no-store' });
+      const data = await response.json();
+
+      if (data && data.ok) {
+        const el = document.getElementById('cnCounter');
+        if (el) el.textContent = String(data.count);
+
+        const w = document.getElementById('cnCampWrap');
+        const c = document.getElementById('cnCampCounter');
+        if (w && c && data.kampagne && typeof data.kampagneCount === 'number') {
+          w.hidden = false;
+          c.textContent = String(data.kampagneCount);
+        }
+      }
+    } catch (e) {}
+  })();
+})();
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  var hamb = document.getElementById("cnHamb");
+  var menu = document.getElementById("cnMenu");
+  var scrim = document.getElementById("cnMenuScrim");
+  var closeBtn = document.getElementById("cnMenuClose");
+
+  function openMenu(){
+    menu.style.display = "block";
+    scrim.style.display = "block";
+  }
+
+  function closeMenu(){
+    menu.style.display = "none";
+    scrim.style.display = "none";
+  }
+
+  // Nyitás
+  hamb.addEventListener("click", openMenu);
+
+  // Zárás háttérre
+  scrim.addEventListener("click", closeMenu);
+
+  // Zárás X gombra
+  if(closeBtn){
+    closeBtn.addEventListener("click", closeMenu);
+  }
+
+ // ZÁRÁS MENÜ LINKRE KATTINTÁS UTÁN + Preise hash esetén nyitás
+var links = menu.querySelectorAll("a");
+links.forEach(function(link){
+  link.addEventListener("click", function(){
+    var href = (link.getAttribute("href") || "").trim();
+    closeMenu();
+
+    if(href.toLowerCase() === "#preise"){
+      setTimeout(function(){
+        if(window.__CN_OPEN_PREISE) window.__CN_OPEN_PREISE(true);
+      }, 0);
+    }
+   });
+});
+});
+</script>
+ 
+  <script>
+(function(){
+  "use strict";
+  function $(id){ return document.getElementById(id); }
+
+  var panel = $("cnPricePanel");
+  var btn   = $("cnPriceToggle");
+  var icon  = $("cnPriceToggleIcon");
+
+  if(!panel || !btn) return;
+
+  function setOpen(open){
+    panel.hidden = !open;
+    if(icon) icon.textContent = open ? "–" : "+";
+    btn.querySelector("span").textContent = open ? "Preise ausblenden" : "Preise anzeigen";
+  }
+
+  window.__CN_OPEN_PREISE = function(open){
+    setOpen(!!open);
+    if(open){
+      try{ document.getElementById("preise").scrollIntoView({behavior:"smooth", block:"start"}); }catch(e){}
+    }
+  };
+
+  setOpen(false);
+
+  btn.addEventListener("click", function(){
+    setOpen(panel.hidden);
+  });
+
+  function openIfHash(){
+    if(String(location.hash||"").toLowerCase()==="#preise"){
+      setOpen(true);
+    }
+  }
+  window.addEventListener("hashchange", openIfHash);
+  openIfHash();
+})();
+</script>
+ 
+</body>
+</html>
